@@ -4,5 +4,9 @@ import com.game.carcassonne.carcassonnegame.squares.Road;
 
 public class RoadPart extends Road implements Part {
 
+    @Override
+    public String toString() {
+        return "RoadPart{}";
+    }
 
 }

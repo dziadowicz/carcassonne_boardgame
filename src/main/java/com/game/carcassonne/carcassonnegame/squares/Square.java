@@ -2,39 +2,50 @@ package com.game.carcassonne.carcassonnegame.squares;
 
 import com.game.carcassonne.carcassonnegame.squares.parts.Part;
 
-public class Square {
+public class Square implements Squares {
 
-    private final Part side1;
-    private final Part side2;
-    private final Part side3;
-    private final Part side4;
-    private final boolean isThereMonastery;
+    private final Part up;
+    private final Part left;
+    private final Part right;
+    private final Part down;
+    private final Monastery monastery;
 
-    public Square(Part side1, Part side2, Part side3, Part side4, boolean isThereMonastery) {
-        this.side1 = side1;
-        this.side2 = side2;
-        this.side3 = side3;
-        this.side4 = side4;
-        this.isThereMonastery = isThereMonastery;
+    public Square(Part up, Part left, Part side3, Part down, Monastery monastery) {
+        this.up = up;
+        this.left = left;
+        this.right = side3;
+        this.down = down;
+        this.monastery = monastery;
     }
 
-    public Part getSide1() {
-        return side1;
+    public Part getUp() {
+        return up;
     }
 
-    public Part getSide2() {
-        return side2;
+    public Part getLeft() {
+        return left;
     }
 
-    public Part getSide3() {
-        return side3;
+    public Part getRight() {
+        return right;
     }
 
-    public Part getSide4() {
-        return side4;
+    public Part getDown() {
+        return down;
     }
 
     public boolean isThereMonastery() {
-        return isThereMonastery;
+        return monastery.isThereMonastery();
+    }
+
+    @Override
+    public String toString() {
+        return "Square{" +
+                "up=" + up +
+                ", left=" + left +
+                ", right=" + right +
+                ", down=" + down +
+                ", " + monastery +
+                '}';
     }
 }
