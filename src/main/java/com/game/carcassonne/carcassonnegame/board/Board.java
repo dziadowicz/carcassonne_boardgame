@@ -14,7 +14,15 @@ import java.util.List;
 public class Board {
 
     private List<List<Squares>> columnList = new ArrayList<>();
-    private final Square startingSquare = new Square(new CitiPart(), new RoadPart(), new RoadPart(), new FieldPart(), new Monastery(false));
+    private final Square startingSquare = new Square(new CitiPart(false, false, false),
+            new RoadPart(false, false, true,
+                    new FieldPart(false, false, true),
+                    new FieldPart(false, true, true)),
+            new RoadPart(false, false, true,
+                    new FieldPart(true, false, true),
+                    new FieldPart(false, false, true)),
+            new FieldPart(true, true, false),
+            new Monastery(false));
 
     public void createNewBoard(int boardSize) {
 

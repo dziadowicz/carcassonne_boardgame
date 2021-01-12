@@ -4,9 +4,92 @@ import com.game.carcassonne.carcassonnegame.squares.Road;
 
 public class RoadPart extends Road implements Part {
 
-    @Override
-    public String toString() {
-        return "RoadPart{}";
+    private final boolean connectionToTheLeft;
+    private final boolean connectionToTheRight;
+    private final boolean connectionAcross;
+    private boolean externalConnection = false;
+    private int raw = -1;
+    private int column = -1;
+    private FieldPart leftField;
+    private FieldPart rightField;
+
+    public RoadPart(boolean connectionToTheLeft, boolean connectionToTheRight,
+                    boolean connectionAcross, FieldPart leftField, FieldPart rightField) {
+        this.connectionToTheLeft = connectionToTheLeft;
+        this.connectionToTheRight = connectionToTheRight;
+        this.connectionAcross = connectionAcross;
+        this.leftField = leftField;
+        this.rightField = rightField;
     }
 
+    @Override
+    public void setExternalConnection() {
+        externalConnection = true;
+    }
+
+    @Override
+    public boolean isExternalConnection() {
+        return externalConnection;
+    }
+
+    public FieldPart getLeftField() {
+        return leftField;
+    }
+
+    public FieldPart getRightField() {
+        return rightField;
+    }
+
+    @Override
+    public int getRaw() {
+        return raw;
+    }
+
+    public void setRaw(int raw) {
+        this.raw = raw;
+    }
+
+    @Override
+    public int getColumn() {
+        return column;
+    }
+
+    @Override
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+    @Override
+    public String position() {
+        return "raw: " + getRaw() + "\ncolumn: " + getColumn();
+    }
+
+    @Override
+    public boolean isConnectionToTheLeft() {
+        return connectionToTheLeft;
+    }
+
+    @Override
+    public boolean isConnectionToTheRight() {
+        return connectionToTheRight;
+    }
+
+    @Override
+    public boolean isConnectionAcross() {
+        return connectionAcross;
+    }
+
+    @Override
+    public String toString() {
+        return "RoadPart{" +
+                "connectionToTheLeft=" + connectionToTheLeft +
+                ", connectionToTheRight=" + connectionToTheRight +
+                ", connectionAcross=" + connectionAcross +
+                ", externalConnection=" + externalConnection +
+                ", raw=" + raw +
+                ", column=" + column +
+                ", leftField=" + leftField +
+                ", rightField=" + rightField +
+                '}';
+    }
 }

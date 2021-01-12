@@ -18,4 +18,53 @@ public class EmptyPart implements Part{
         return "EmptyPart{}";
     }
 
+    @Override
+    public boolean isExternalConnection() {
+        return false;
+    }
+
+    @Override
+    public void setExternalConnection() {
+
+    }
+
+    @Override
+    public boolean isConnectionToTheLeft() {
+        return false;
+    }
+
+    @Override
+    public boolean isConnectionToTheRight() {
+        return false;
+    }
+
+    @Override
+    public boolean isConnectionAcross() {
+        return false;
+    }
+
+    @Override
+    public int getRaw() {
+        return 0;
+    }
+
+    @Override
+    public void setRaw(int raw) {
+
+    }
+
+    @Override
+    public int getColumn() {
+        return 0;
+    }
+
+    @Override
+    public void setColumn(int column) {
+
+    }
+
+    @Override
+    public String position() {
+        return null;
+    }
 }
