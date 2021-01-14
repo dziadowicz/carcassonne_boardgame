@@ -2,22 +2,16 @@ package com.game.carcassonne.carcassonnegame.players;
 
 public class Player {
 
-    private String color;
-    private int points;
-    private int numberOfPawns;
+    private final String color;
+    private int points = 0;
+    private int numberOfPawns = 7;
 
-    public Player(String color, int points, int numberOfPawns) {
+    public Player(String color) {
         this.color = color;
-        this.points = points;
-        this.numberOfPawns = numberOfPawns;
     }
 
     public String getColor() {
         return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public int getPoints() {
@@ -34,5 +28,14 @@ public class Player {
 
     public void setNumberOfPawns(int numberOfPawns) {
         this.numberOfPawns = numberOfPawns;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "color='" + color + '\'' +
+                ", points=" + points +
+                ", numberOfPawns=" + numberOfPawns +
+                '}';
     }
 }

@@ -78,6 +78,7 @@ public class CitiPart extends Citi implements Part {
                 "connectionToTheLeft=" + connectionToTheLeft +
                 ", connectionToTheRight=" + connectionToTheRight +
                 ", connectionAcross=" + connectionAcross +
+                ", shield=" + shield +
                 ", externalConnection=" + externalConnection +
                 ", raw=" + raw +
                 ", column=" + column +

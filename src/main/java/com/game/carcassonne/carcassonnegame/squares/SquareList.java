@@ -4,8 +4,7 @@ import com.game.carcassonne.carcassonnegame.squares.parts.CitiPart;
 import com.game.carcassonne.carcassonnegame.squares.parts.FieldPart;
 import com.game.carcassonne.carcassonnegame.squares.parts.RoadPart;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class SquareList {
 
@@ -260,9 +259,9 @@ public class SquareList {
         return square00;
     }
 
-    public static List<Square> squares() {
+    public static List<Square> getSquares() {
         List<Square> squareList = new ArrayList<>();
-        squareList.add(square00);
+        squareList.add(Square.copySquare(square00));
         squareList.add(square01);
         squareList.add(square02);
         squareList.add(square03);
@@ -336,5 +335,19 @@ public class SquareList {
         squareList.add(square71);
 
         return squareList;
+    }
+
+    public static Deque<Square> shuffledSquareDeque() {
+
+        Deque<Square> gameSquaresDeque = new ArrayDeque<>();
+
+        List<Square> shuffledList = SquareList.getSquares();
+        Collections.shuffle(shuffledList);
+
+        for (Square square: shuffledList) {
+            gameSquaresDeque.push(square);
+        }
+
+        return gameSquaresDeque;
     }
 }
