@@ -2,6 +2,6 @@ package com.game.carcassonne.carcassonnegame.squares;
 
 public interface Removable extends Playable {
 
-    boolean chceckIfIsFinished();
+    boolean checkIfIsFinished();
     void removePawn();
 }

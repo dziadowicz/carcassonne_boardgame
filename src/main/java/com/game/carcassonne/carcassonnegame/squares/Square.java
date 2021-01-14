@@ -25,16 +25,20 @@ public class Square implements Squares {
         Part right;
 
         if (square.getUp().getClass() == CitiPart.class) {
-            up = new CitiPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross());
+            CitiPart citiPart = (CitiPart) square.getUp();
+            up = new CitiPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross(), citiPart.isShield());
         } else if (square.getUp().getClass() == FieldPart.class) {
             up = new FieldPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross());
         } else if (square.getUp().getClass() == RoadPart.class) {
             RoadPart roadPart = (RoadPart) square.getUp();
-            up = new RoadPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross(), roadPart.getLeftField(), roadPart.getRightField());
+            FieldPart leftField = new FieldPart(roadPart.getLeftField().isConnectionToTheLeft(), roadPart.getLeftField().isConnectionToTheRight(), roadPart.getLeftField().isConnectionAcross());
+            FieldPart rightField = new FieldPart(roadPart.getRightField().isConnectionToTheLeft(), roadPart.getRightField().isConnectionToTheRight(), roadPart.getRightField().isConnectionAcross());
+            up = new RoadPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross(), leftField, rightField);
         } else {up = new EmptyPart();}
 
         if (square.getLeft().getClass() == CitiPart.class) {
-            left = new CitiPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross());
+            CitiPart citiPart = (CitiPart) square.getLeft();
+            left = new CitiPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross(), citiPart.isShield());
         } else if (square.getLeft().getClass() == FieldPart.class) {
             left = new FieldPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross());
         } else if (square.getLeft().getClass() == RoadPart.class) {
@@ -43,7 +47,8 @@ public class Square implements Squares {
         } else {left = new EmptyPart();}
 
         if (square.getRight().getClass() == CitiPart.class) {
-            right = new CitiPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross());
+            CitiPart citiPart = (CitiPart) square.getRight();
+            right = new CitiPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross(), citiPart.isShield());
         } else if (square.getRight().getClass() == FieldPart.class) {
             right = new FieldPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross());
         } else if (square.getRight().getClass() == RoadPart.class) {
@@ -52,7 +57,8 @@ public class Square implements Squares {
         } else {right = new EmptyPart();}
 
         if (square.getDown().getClass() == CitiPart.class) {
-            down = new CitiPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross());
+            CitiPart citiPart = (CitiPart) square.getDown();
+            down = new CitiPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross(), citiPart.isShield());
         } else if (square.getDown().getClass() == FieldPart.class) {
             down = new FieldPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross());
         } else if (square.getDown().getClass() == RoadPart.class) {
@@ -66,97 +72,15 @@ public class Square implements Squares {
     }
 
     public static Square copyAndTurnLeftSquare(Square square) {
-        Part up;
-        Part left;
-        Part down;
-        Part right;
 
-        if (square.getUp().getClass() == CitiPart.class) {
-            up = new CitiPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross());
-        } else if (square.getUp().getClass() == FieldPart.class) {
-            up = new FieldPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross());
-        } else if (square.getUp().getClass() == RoadPart.class) {
-            RoadPart roadPart = (RoadPart) square.getUp();
-            up = new RoadPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross(), roadPart.getLeftField(), roadPart.getRightField());
-        } else {up = new EmptyPart();}
-
-        if (square.getLeft().getClass() == CitiPart.class) {
-            left = new CitiPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross());
-        } else if (square.getLeft().getClass() == FieldPart.class) {
-            left = new FieldPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross());
-        } else if (square.getLeft().getClass() == RoadPart.class) {
-            RoadPart roadPart = (RoadPart) square.getLeft();
-            left = new RoadPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross(), roadPart.getLeftField(), roadPart.getRightField());
-        } else {left = new EmptyPart();}
-
-        if (square.getRight().getClass() == CitiPart.class) {
-            right = new CitiPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross());
-        } else if (square.getRight().getClass() == FieldPart.class) {
-            right = new FieldPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross());
-        } else if (square.getRight().getClass() == RoadPart.class) {
-            RoadPart roadPart = (RoadPart) square.getRight();
-            right = new RoadPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross(), roadPart.getLeftField(), roadPart.getRightField());
-        } else {right = new EmptyPart();}
-
-        if (square.getDown().getClass() == CitiPart.class) {
-            down = new CitiPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross());
-        } else if (square.getDown().getClass() == FieldPart.class) {
-            down = new FieldPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross());
-        } else if (square.getDown().getClass() == RoadPart.class) {
-            RoadPart roadPart = (RoadPart) square.getDown();
-            down = new RoadPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross(), roadPart.getLeftField(), roadPart.getRightField());
-        } else {down = new EmptyPart();}
-
-        Monastery monastery = new Monastery(square.isThereMonastery());
-
-        return new Square(right, up, down, left, monastery);
+        Square turnLeft = Square.copySquare(square);
+        return new Square(turnLeft.getRight(), turnLeft.getUp(), turnLeft.getDown(), turnLeft.getLeft(), turnLeft.getMonastery());
     }
 
     public static Square copyAndTurnRightSquare(Square square) {
-        Part up;
-        Part left;
-        Part down;
-        Part right;
 
-        if (square.getUp().getClass() == CitiPart.class) {
-            up = new CitiPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross());
-        } else if (square.getUp().getClass() == FieldPart.class) {
-            up = new FieldPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross());
-        } else if (square.getUp().getClass() == RoadPart.class) {
-            RoadPart roadPart = (RoadPart) square.getUp();
-            up = new RoadPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross(), roadPart.getLeftField(), roadPart.getRightField());
-        } else {up = new EmptyPart();}
-
-        if (square.getLeft().getClass() == CitiPart.class) {
-            left = new CitiPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross());
-        } else if (square.getLeft().getClass() == FieldPart.class) {
-            left = new FieldPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross());
-        } else if (square.getLeft().getClass() == RoadPart.class) {
-            RoadPart roadPart = (RoadPart) square.getLeft();
-            left = new RoadPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross(), roadPart.getLeftField(), roadPart.getRightField());
-        } else {left = new EmptyPart();}
-
-        if (square.getRight().getClass() == CitiPart.class) {
-            right = new CitiPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross());
-        } else if (square.getRight().getClass() == FieldPart.class) {
-            right = new FieldPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross());
-        } else if (square.getRight().getClass() == RoadPart.class) {
-            RoadPart roadPart = (RoadPart) square.getRight();
-            right = new RoadPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross(), roadPart.getLeftField(), roadPart.getRightField());
-        } else {right = new EmptyPart();}
-
-        if (square.getDown().getClass() == CitiPart.class) {
-            down = new CitiPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross());
-        } else if (square.getDown().getClass() == FieldPart.class) {
-            down = new FieldPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross());
-        } else if (square.getDown().getClass() == RoadPart.class) {
-            RoadPart roadPart = (RoadPart) square.getDown();
-            down = new RoadPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross(), roadPart.getLeftField(), roadPart.getRightField());
-        } else {down = new EmptyPart();}
-
-        Monastery monastery = new Monastery(square.isThereMonastery());
-
-        return new Square(left, down, up, right, monastery);
+        Square turnRight = Square.copySquare(square);
+        return new Square(turnRight.getLeft(), turnRight.getDown(), turnRight.getUp(), turnRight.getRight(), turnRight.getMonastery());
     }
 
     @Override

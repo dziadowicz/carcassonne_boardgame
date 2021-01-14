@@ -7,14 +7,20 @@ public class CitiPart extends Citi implements Part {
     private final boolean connectionToTheLeft;
     private final boolean connectionToTheRight;
     private final boolean connectionAcross;
+    private final boolean shield;
     private boolean externalConnection = false;
     private int raw = -1;
     private int column = -1;
 
-    public CitiPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross) {
+    public CitiPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross, boolean shield) {
         this.connectionToTheLeft = connectionToTheLeft;
         this.connectionToTheRight = connectionToTheRight;
         this.connectionAcross = connectionAcross;
+        this.shield = shield;
+    }
+
+    public boolean isShield() {
+        return shield;
     }
 
     @Override

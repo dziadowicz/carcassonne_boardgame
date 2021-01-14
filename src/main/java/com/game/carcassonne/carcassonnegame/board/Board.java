@@ -1,9 +1,6 @@
 package com.game.carcassonne.carcassonnegame.board;
 
-import com.game.carcassonne.carcassonnegame.squares.EmptySquare;
-import com.game.carcassonne.carcassonnegame.squares.Monastery;
-import com.game.carcassonne.carcassonnegame.squares.Square;
-import com.game.carcassonne.carcassonnegame.squares.Squares;
+import com.game.carcassonne.carcassonnegame.squares.*;
 import com.game.carcassonne.carcassonnegame.squares.parts.CitiPart;
 import com.game.carcassonne.carcassonnegame.squares.parts.FieldPart;
 import com.game.carcassonne.carcassonnegame.squares.parts.RoadPart;
@@ -14,7 +11,7 @@ import java.util.List;
 public class Board {
 
     private List<List<Squares>> columnList = new ArrayList<>();
-    private final Square startingSquare = new Square(new CitiPart(false, false, false),
+/*    private final Square startingSquare = new Square(new CitiPart(false, false, false),
             new RoadPart(false, false, true,
                     new FieldPart(false, false, true),
                     new FieldPart(false, true, true)),
@@ -22,7 +19,7 @@ public class Board {
                     new FieldPart(true, false, true),
                     new FieldPart(false, false, true)),
             new FieldPart(true, true, false),
-            new Monastery(false));
+            new Monastery(false));*/
 
     public void createNewBoard(int boardSize) {
 
@@ -33,7 +30,7 @@ public class Board {
             }
         }
 
-        columnList.get(boardSize/2).set(boardSize/2, startingSquare);
+        columnList.get(boardSize/2).set(boardSize/2, SquareList.getStartingSquare());
 
     }
 

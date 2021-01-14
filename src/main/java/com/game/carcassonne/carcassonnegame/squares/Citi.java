@@ -15,7 +15,7 @@ public class Citi implements Removable{
     }
 
     @Override
-    public boolean chceckIfIsFinished() {
+    public boolean checkIfIsFinished() {
         return false;
     }
 
