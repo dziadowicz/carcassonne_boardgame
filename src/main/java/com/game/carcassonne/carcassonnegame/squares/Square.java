@@ -9,6 +9,8 @@ public class Square implements Squares {
     private final Part right;
     private final Part down;
     private final Monastery monastery;
+    private int column;
+    private int raw;
 
     public Square(Part up, Part left, Part right, Part down, Monastery monastery) {
         this.up = up;
@@ -16,6 +18,24 @@ public class Square implements Squares {
         this.right = right;
         this.down = down;
         this.monastery = monastery;
+        column = 99999;
+        raw = 99999;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+    public int getRaw() {
+        return raw;
+    }
+
+    public void setRaw(int raw) {
+        this.raw = raw;
     }
 
     public static Square copySquare(Square square) {

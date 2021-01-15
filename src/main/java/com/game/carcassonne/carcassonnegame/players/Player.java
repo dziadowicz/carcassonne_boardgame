@@ -1,11 +1,18 @@
 package com.game.carcassonne.carcassonnegame.players;
 
+import com.game.carcassonne.carcassonnegame.board.Board;
+import com.game.carcassonne.carcassonnegame.squares.EmptySquare;
+import com.game.carcassonne.carcassonnegame.squares.Square;
+import com.game.carcassonne.carcassonnegame.squares.Squares;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
 
     private final String color;
     private int points = 0;
     private int numberOfPawns = 7;
-
     public Player(String color) {
         this.color = color;
     }

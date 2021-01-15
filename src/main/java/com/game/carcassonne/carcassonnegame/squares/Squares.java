@@ -8,4 +8,6 @@ public interface Squares {
     Part getLeft();
     Part getRight();
     Part getDown();
+    int getColumn();
+    int getRaw();
 }
