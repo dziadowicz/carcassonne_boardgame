@@ -13,8 +13,11 @@ public class CarcassonneGameApplication {
 
 
             Game game = new Game(4);
-            game.newGame();
-
+            try {
+                game.newGame();
+            } catch (WrongPlayersNumberException e) {
+                System.out.println("Incorrect number of players");
+            }
 
     }
 

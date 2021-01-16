@@ -11,6 +11,7 @@ public class CitiPart extends Citi implements Part {
     private boolean externalConnection = false;
     private int raw = -1;
     private int column = -1;
+    private String position;
 
     public CitiPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross, boolean shield) {
         this.connectionToTheLeft = connectionToTheLeft;
@@ -53,8 +54,13 @@ public class CitiPart extends Citi implements Part {
     }
 
     @Override
-    public String position() {
-        return "raw: " + getRaw() + "\ncolumn: " + getColumn();
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    @Override
+    public String getPosition() {
+        return position;
     }
 
     @Override

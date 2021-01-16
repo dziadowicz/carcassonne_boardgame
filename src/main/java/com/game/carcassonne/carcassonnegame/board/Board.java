@@ -1,21 +1,67 @@
 package com.game.carcassonne.carcassonnegame.board;
 
 import com.game.carcassonne.carcassonnegame.squares.*;
-import com.game.carcassonne.carcassonnegame.squares.parts.CitiPart;
-import com.game.carcassonne.carcassonnegame.squares.parts.FieldPart;
-import com.game.carcassonne.carcassonnegame.squares.parts.RoadPart;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Board {
 
     private List<List<Squares>> columnList = new ArrayList<>();
     private int boardSize;
+    private List<Squares> availableSquaresList = new ArrayList<>();
 
     public Board(int boardSize) {
         this.boardSize = boardSize;
         createNewBoard();
+    }
+
+    public void setAvailableSquaresList(Square square){
+
+        for (int raw = 0; raw < getBoardSize(); raw++) {
+            for (int column = 0; column < getBoardSize(); column++) {
+                if (doesItFit(column, raw, square)) {
+                    availableSquaresList.add(getSquare(column, raw));
+                }
+            }
+        }
+    }
+
+    public boolean isThereAnyPossibleMove(Square square) {
+        availableSquaresList.clear();
+
+        setAvailableSquaresList(square);
+        setAvailableSquaresList(Square.copyAndTurnRightSquare(square));
+        setAvailableSquaresList(Square.copyAndTurnRightSquare(Square.copyAndTurnRightSquare(square)));
+        setAvailableSquaresList(Square.copyAndTurnLeftSquare(square));
+
+        if (availableSquaresList.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean putSquareRandomly(Square square) {
+
+        availableSquaresList.clear();
+        setAvailableSquaresList(square);
+        if (availableSquaresList.size() > 0) {
+            Squares availableEmptySquare = availableSquaresList.get(new Random().nextInt(availableSquaresList.size()));
+            try {
+                square.setColumn(availableEmptySquare.getColumn());
+                square.setRaw(availableEmptySquare.getRaw());
+                putSquare(availableEmptySquare.getColumn(), availableEmptySquare.getRaw(), square);
+            } catch (WrongPutException e) {
+                System.out.println("Wrong put: " + e);
+            }
+            return true;
+        } else {return false;}
+    }
+
+    public List<Squares> getAvailableSquaresList() {
+        return availableSquaresList;
     }
 
     public int getBoardSize() {
@@ -65,8 +111,7 @@ public class Board {
         }
     }
 
-    public boolean putSquare(int column, int raw, Square square) {// throws WrongPutException {
-
+    public boolean putSquare(int column, int raw, Square square) throws WrongPutException {
 
         if (doesItFit(column, raw, square)) {
             columnList.get(raw).set(column, square);
@@ -74,8 +119,7 @@ public class Board {
             square.setColumn(column);
             return true;
         } else {
-            return false;
-            //throw new WrongPutException();
+            throw new WrongPutException();
         }
     }
 
@@ -86,5 +130,4 @@ public class Board {
     public Squares getSquare(int column, int raw) {
         return columnList.get(raw).get(column);
     }
-
 }

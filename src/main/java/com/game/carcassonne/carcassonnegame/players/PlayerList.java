@@ -7,9 +7,9 @@ public class PlayerList {
 
     private List<Player> players = new ArrayList<>();
 
-    public PlayerList(int playersNumber){ //throws WrongPlayersNumberException {
+    public PlayerList(int playersNumber) throws WrongPlayersNumberException {
 
-//        if (playersNumber < 2 || playersNumber > 6) throw new WrongPlayersNumberException();
+        if (playersNumber < 2 || playersNumber > 6) throw new WrongPlayersNumberException();
 
         List<Player> allPlayers = new ArrayList<>();
         Player redPlayer = new Player("red");

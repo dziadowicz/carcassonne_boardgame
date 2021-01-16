@@ -64,7 +64,12 @@ public class EmptyPart implements Part{
     }
 
     @Override
-    public String position() {
+    public void setPosition(String position) {
+
+    }
+
+    @Override
+    public String getPosition() {
         return null;
     }
 }

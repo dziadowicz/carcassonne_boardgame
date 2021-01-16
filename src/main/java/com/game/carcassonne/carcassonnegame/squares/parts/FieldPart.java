@@ -10,6 +10,7 @@ public class FieldPart extends Field implements Part {
     private boolean externalConnection = false;
     private int raw = -1;
     private int column = -1;
+    private String position;
 
     public FieldPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross) {
         this.connectionToTheLeft = connectionToTheLeft;
@@ -47,8 +48,13 @@ public class FieldPart extends Field implements Part {
     }
 
     @Override
-    public String position() {
-        return "raw: " + getRaw() + "\ncolumn: " + getColumn();
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    @Override
+    public String getPosition() {
+        return position;
     }
 
     @Override

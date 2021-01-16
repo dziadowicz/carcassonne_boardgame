@@ -10,6 +10,7 @@ public class RoadPart extends Road implements Part {
     private boolean externalConnection = false;
     private int raw = -1;
     private int column = -1;
+    private String position;
     private FieldPart leftField;
     private FieldPart rightField;
 
@@ -60,8 +61,13 @@ public class RoadPart extends Road implements Part {
     }
 
     @Override
-    public String position() {
-        return "raw: " + getRaw() + "\ncolumn: " + getColumn();
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    @Override
+    public String getPosition() {
+        return position;
     }
 
     @Override

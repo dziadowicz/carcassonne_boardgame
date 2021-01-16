@@ -13,5 +13,6 @@ public interface Part extends Playable {
     void setRaw(int raw);
     int getColumn();
     void setColumn(int column);
-    String position();
+    void setPosition(String position);
+    String getPosition();
 }
