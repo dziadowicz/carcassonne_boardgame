@@ -1,6 +1,7 @@
 package com.game.carcassonne.carcassonnegame.game;
 
 import com.game.carcassonne.carcassonnegame.board.Board;
+import com.game.carcassonne.carcassonnegame.board.WrongPutException;
 import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.players.PlayerList;
 import com.game.carcassonne.carcassonnegame.players.WrongPlayersNumberException;
@@ -11,14 +12,14 @@ import com.game.carcassonne.carcassonnegame.squares.Squares;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
+import java.util.Random;
 
 public class Game {
 
     private int playersNumber;
     private Deque<Square> squareDeque = SquareList.shuffledSquareDeque();
     public Board board = new Board(squareDeque.size());
-    private PlayerList playerList = new PlayerList(getPlayersNumber());
-    private List<Player> players = playerList.getPlayers();
+
     List<Squares> availableSquaresList = new ArrayList<>();
 
     public Game(int playersNumber){ //throws WrongPlayersNumberException {
@@ -35,7 +36,7 @@ public class Game {
         for (int raw = 0; raw < board.getBoardSize(); raw++) {
             for (int column = 0; column < board.getBoardSize(); column++) {
                 if (board.doesItFit(column, raw, square)) {
-                    availableSquaresList.add(square);
+                    availableSquaresList.add(board.getSquare(column, raw));
                 }
             }
         }
@@ -56,9 +57,32 @@ public class Game {
         }
     }
 
+    public boolean putSquareRandomly(Square square) {
+
+        availableSquaresList.clear();
+        setAvailableSquaresList(square);
+        if (availableSquaresList.size() > 0) {
+            Squares availableEmptySquare = availableSquaresList.get(new Random().nextInt(availableSquaresList.size()));
+ //           try {
+                square.setColumn(availableEmptySquare.getColumn());
+                square.setRaw(availableEmptySquare.getRaw());
+                board.putSquare(availableEmptySquare.getColumn(), availableEmptySquare.getRaw(), square);
+ //           } catch (WrongPutException e) {
+ //               System.out.println("Wrong put: " + e);
+  //          }
+            return true;
+        } else {return false;}
+
+    }
+
     public void newGame() {
+        PlayerList playerList = new PlayerList(getPlayersNumber());
+        List<Player> players = playerList.getPlayers();
 
         int activePLayer = 0;
+
+        System.out.println(players.size());
+
         while (squareDeque.size() > 0) {
 
             if (!isThereAnyPossibleMove(squareDeque.peek())){
@@ -68,10 +92,22 @@ public class Game {
 
             Square square = squareDeque.pop();
 
+            System.out.println("Player " + players.get(activePLayer).getColor() + " turn.");
+
+            putSquareRandomly(square);
+
             availableSquaresList.clear();
-                for (int i = 0; i < 4; i++) {
-                    setAvailableSquaresList(square);
-                }
+            setAvailableSquaresList(square);
+            if (availableSquaresList.size() > 0) {
+                Squares availableEmptySquare = availableSquaresList.get(new Random().nextInt(availableSquaresList.size()));
+//            try {
+                board.putSquare(availableEmptySquare.getColumn(), availableEmptySquare.getRaw(), square);
+                System.out.println(square.getColumn() + " " + square.getRaw());
+                //          } catch (WrongPutException e) {
+                //              System.out.println(e);
+                //          }
+            }
+            //            System.out.println(putSquareRandomly(square));
 
 //            for (Squares squares: availableSquaresList
 //                 ) {

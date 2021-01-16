@@ -12,7 +12,7 @@ public class CarcassonneGameApplication {
 
 
 
-            Game game = new Game(2);
+            Game game = new Game(4);
             game.newGame();
 
 

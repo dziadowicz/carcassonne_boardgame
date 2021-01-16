@@ -65,7 +65,7 @@ public class Board {
         }
     }
 
-    public boolean putSquare(int column, int raw, Square square) throws WrongPutException {
+    public boolean putSquare(int column, int raw, Square square) {// throws WrongPutException {
 
 
         if (doesItFit(column, raw, square)) {
@@ -74,7 +74,8 @@ public class Board {
             square.setColumn(column);
             return true;
         } else {
-            throw new WrongPutException();
+            return false;
+            //throw new WrongPutException();
         }
     }
 
