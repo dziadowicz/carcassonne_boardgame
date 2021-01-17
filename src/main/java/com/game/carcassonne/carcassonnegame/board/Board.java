@@ -19,6 +19,8 @@ public class Board {
 
     public void setAvailableSquaresList(Square square){
 
+        availableSquaresList.clear();
+
         for (int raw = 0; raw < getBoardSize(); raw++) {
             for (int column = 0; column < getBoardSize(); column++) {
                 if (doesItFit(column, raw, square)) {
@@ -120,6 +122,17 @@ public class Board {
             return true;
         } else {
             throw new WrongPutException();
+        }
+    }
+
+    public void showAvailableSquares(Square square) {
+
+    setAvailableSquaresList(square);
+
+        System.out.println("The square can be located in: ");
+
+        for (Squares squares: availableSquaresList) {
+            System.out.print(squares.getColumn() + ":" + squares.getRaw() + " | ");
         }
     }
 

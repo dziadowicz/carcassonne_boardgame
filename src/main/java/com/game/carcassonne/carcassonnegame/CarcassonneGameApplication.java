@@ -6,9 +6,12 @@ import com.game.carcassonne.carcassonnegame.players.PlayerList;
 import com.game.carcassonne.carcassonnegame.players.WrongPlayersNumberException;
 import com.game.carcassonne.carcassonnegame.squares.SquareList;
 
+import java.util.Scanner;
+
 public class CarcassonneGameApplication {
 
     public static void main(String[] args) {
+
 
 
 

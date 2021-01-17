@@ -45,8 +45,8 @@ public class Game {
 
 //            System.out.println("Player " + players.get(activePLayer).getColor() + " turn.");
 
-            board.putSquareRandomly(square);
-
+//            board.putSquareRandomly(square);
+            players.get(activePLayer).turn(board, square);
 //            System.out.println(board.putSquareRandomly(square));
 
 //            for (Squares squares: availableSquaresList
