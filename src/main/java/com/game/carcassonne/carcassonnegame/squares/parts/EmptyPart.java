@@ -4,8 +4,9 @@ import com.game.carcassonne.carcassonnegame.players.Player;
 
 public class EmptyPart implements Part{
     @Override
-    public void checkAvailability() {
+    public boolean isAvailableForPawn() {
 
+        return false;
     }
 
     @Override

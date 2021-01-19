@@ -1,6 +1,9 @@
 package com.game.carcassonne.carcassonnegame.squares.parts;
 
+import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Citi;
+import com.game.carcassonne.carcassonnegame.squares.Playable;
+import com.game.carcassonne.carcassonnegame.squares.Square;
 
 public class CitiPart extends Citi implements Part {
 
@@ -9,9 +12,11 @@ public class CitiPart extends Citi implements Part {
     private final boolean connectionAcross;
     private final boolean shield;
     private boolean externalConnection = false;
-    private int raw = -1;
-    private int column = -1;
+    private int raw = 99999;
+    private int column = 99999;
     private String position;
+    private boolean isTherePawn = false;
+
 
     public CitiPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross, boolean shield) {
         this.connectionToTheLeft = connectionToTheLeft;
@@ -22,6 +27,11 @@ public class CitiPart extends Citi implements Part {
 
     public boolean isShield() {
         return shield;
+    }
+
+    @Override
+    public void putPawn(Player player) {
+        isTherePawn = true;
     }
 
     @Override

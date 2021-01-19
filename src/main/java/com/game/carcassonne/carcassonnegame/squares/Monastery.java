@@ -15,8 +15,9 @@ public class Monastery implements Removable {
     }
 
     @Override
-    public void checkAvailability() {
+    public boolean isAvailableForPawn() {
 
+        return true;
     }
 
     @Override

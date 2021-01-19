@@ -5,6 +5,7 @@ import com.game.carcassonne.carcassonnegame.board.WrongPutException;
 import com.game.carcassonne.carcassonnegame.squares.EmptySquare;
 import com.game.carcassonne.carcassonnegame.squares.Square;
 import com.game.carcassonne.carcassonnegame.squares.Squares;
+import com.game.carcassonne.carcassonnegame.squares.parts.EmptyPart;
 import com.game.carcassonne.carcassonnegame.squares.parts.Part;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class Player {
         int raw = 9999;
         while (i == 0) {
             board.showAvailableSquares(square);
-            System.out.println("Pick place to put your square or rotate it (write: right, left or column:raw)");
+            System.out.println("\nPick place to put your square or rotate it (write: right, left or column:raw)");
             Scanner in = new Scanner(System.in);
             String input = in.nextLine();
             if (input.equals("right")) {
@@ -68,6 +69,38 @@ public class Player {
         return square;
     }
 
+    public Part setPawnPosition(Board board, Square square) {
+        List<Part> putablePartsList = board.setPutablePartsList(square);
+        int i = 0;
+        int n = 0;
+        Part part = new EmptyPart();
+        if (putablePartsList.size() > 0 && numberOfPawns > 0) {
+            System.out.println("\nType \"next\" until part where you are interested to put your pawn will be written and then type \"this\" to choose, or type \"none\" if you don't want to put any pawn");
+            while (i == 0) {
+                System.out.println(putablePartsList.get(n));
+                Scanner in = new Scanner(System.in);
+                String input = in.nextLine();
+                if (input.equals("this")) {
+                    part = putablePartsList.get(n);
+                    i = 9;
+                } else if (input.equals("next")) {
+                    if (n < putablePartsList.size() - 1) {
+                        n++;
+                    } else {
+                        n = 0;
+                    }
+                } else if (input.equals("none")) {
+                    i = 9;
+                } else {
+                    System.out.println("Wrong input. Try again.");
+                }
+            }
+        } else {
+            System.out.println("You are not able to put any pawn.");
+        }
+            return part;
+    }
+
     public void turn(Board board, Square square) {
 
         square = setSquare(board, square);
@@ -79,8 +112,13 @@ public class Player {
             System.out.println(e);
         }
         System.out.println(column + ":" + raw + square);
-//        Part part = setPawnPosition();
-//        square.putPawn(part);
+        Part part = setPawnPosition(board, square);
+
+        System.out.println(part);
+
+//        if (!part.getClass().equals(EmptyPart.class)) {
+//            square.putPawn(part);
+//        }
 //        board.calculate();
     }
 

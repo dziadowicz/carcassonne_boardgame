@@ -1,6 +1,8 @@
 package com.game.carcassonne.carcassonnegame.squares.parts;
 
+import com.game.carcassonne.carcassonnegame.board.Board;
 import com.game.carcassonne.carcassonnegame.squares.Playable;
+import com.game.carcassonne.carcassonnegame.squares.Square;
 
 public interface Part extends Playable {
 
@@ -14,5 +16,7 @@ public interface Part extends Playable {
     int getColumn();
     void setColumn(int column);
     void setPosition(String position);
+//    void setMaster();
+//    Playable getMaster();
     String getPosition();
 }

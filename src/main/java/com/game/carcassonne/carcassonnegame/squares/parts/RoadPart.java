@@ -8,8 +8,8 @@ public class RoadPart extends Road implements Part {
     private final boolean connectionToTheRight;
     private final boolean connectionAcross;
     private boolean externalConnection = false;
-    private int raw = -1;
-    private int column = -1;
+    private int raw = 99999;
+    private int column = 99999;
     private String position;
     private FieldPart leftField;
     private FieldPart rightField;
@@ -26,6 +26,8 @@ public class RoadPart extends Road implements Part {
     @Override
     public void setExternalConnection() {
         externalConnection = true;
+        leftField.setExternalConnection();
+        rightField.setExternalConnection();
     }
 
     @Override
@@ -47,6 +49,9 @@ public class RoadPart extends Road implements Part {
     }
 
     public void setRaw(int raw) {
+
+        leftField.setRaw(raw);
+        rightField.setRaw(raw);
         this.raw = raw;
     }
 
@@ -57,6 +62,9 @@ public class RoadPart extends Road implements Part {
 
     @Override
     public void setColumn(int column) {
+
+        leftField.setColumn(column);
+        rightField.setColumn(column);
         this.column = column;
     }
 

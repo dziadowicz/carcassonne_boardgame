@@ -15,8 +15,9 @@ public class Road implements Removable {
     }
 
     @Override
-    public void checkAvailability() {
+    public boolean isAvailableForPawn() {
 
+        return false;
     }
 
     @Override

@@ -18,6 +18,10 @@ public class Square implements Squares {
         this.right = right;
         this.down = down;
         this.monastery = monastery;
+        up.setPosition("Up");
+        left.setPosition("Left");
+        right.setPosition("Right");
+        down.setPosition("Down");
         column = 99999;
         raw = 99999;
     }
@@ -27,10 +31,20 @@ public class Square implements Squares {
     }
 
     public void setColumn(int column) {
+        getLeft().setColumn(column);
+        getRight().setColumn(column);
+        getUp().setColumn(column);
+        getDown().setColumn(column);
+
         this.column = column;
     }
 
     public int getRaw() {
+        getLeft().setRaw(raw);
+        getRight().setRaw(raw);
+        getUp().setRaw(raw);
+        getDown().setRaw(raw);
+
         return raw;
     }
 

@@ -4,6 +4,7 @@ import com.game.carcassonne.carcassonnegame.players.Player;
 
 public interface Playable {
 
-    void checkAvailability();
+    boolean isAvailableForPawn();
     void putPawn(Player player);
+    boolean getPawn();
 }

@@ -1,6 +1,8 @@
 package com.game.carcassonne.carcassonnegame.board;
 
 import com.game.carcassonne.carcassonnegame.squares.*;
+import com.game.carcassonne.carcassonnegame.squares.parts.Part;
+import com.game.carcassonne.carcassonnegame.squares.parts.RoadPart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +121,22 @@ public class Board {
             columnList.get(raw).set(column, square);
             square.setRaw(raw);
             square.setColumn(column);
+            if (columnList.get(raw).get(column - 1).getRight().getClass().equals(square.getLeft().getClass())) {
+                square.getLeft().setExternalConnection();
+                columnList.get(raw).get(column - 1).getRight().setExternalConnection();
+            }
+            if (columnList.get(raw).get(column + 1).getLeft().getClass().equals(square.getRight().getClass())){
+                square.getRight().setExternalConnection();
+                columnList.get(raw).get(column + 1).getLeft().setExternalConnection();
+            }
+            if (columnList.get(raw + 1).get(column).getDown().getClass().equals(square.getUp().getClass())) {
+                square.getUp().setExternalConnection();
+                columnList.get(raw + 1).get(column).getDown().setExternalConnection();
+            }
+            if (columnList.get(raw - 1).get(column).getUp().getClass().equals(square.getDown().getClass())) {
+                square.getDown().setExternalConnection();
+                columnList.get(raw - 1).get(column).getUp().setExternalConnection();
+            }
             return true;
         } else {
             throw new WrongPutException();
@@ -134,6 +152,73 @@ public class Board {
         for (Squares squares: availableSquaresList) {
             System.out.print(squares.getColumn() + ":" + squares.getRaw() + " | ");
         }
+    }
+
+    public List<Part> setPutablePartsList(Square square) {
+
+        List<Part> putablePartsList = new ArrayList<>();
+
+        if (!columnList.get(square.getRaw()).get(square.getColumn() + 1).getClass().equals(EmptySquare.class)) {
+            if (square.getRight().isAvailableForPawn()) {
+                putablePartsList.add(square.getRight());
+            }
+            if (square.getRight().getClass().equals(RoadPart.class)) {
+                RoadPart roadPart= (RoadPart)square.getRight();
+                if (roadPart.getLeftField().isAvailableForPawn()) {
+                    putablePartsList.add(roadPart.getLeftField());
+                }
+                if (roadPart.getRightField().isAvailableForPawn()) {
+                    putablePartsList.add(roadPart.getRightField());
+                }
+            }
+        }
+
+        if (!columnList.get(square.getRaw() + 1).get(square.getColumn()).getClass().equals(EmptySquare.class)) {
+            if (square.getUp().isAvailableForPawn()) {
+                putablePartsList.add(square.getUp());
+            }
+            if (square.getUp().getClass().equals(RoadPart.class)) {
+                RoadPart roadPart= (RoadPart)square.getUp();
+                if (roadPart.getLeftField().isAvailableForPawn()) {
+                    putablePartsList.add(roadPart.getLeftField());
+                }
+                if (roadPart.getRightField().isAvailableForPawn()) {
+                    putablePartsList.add(roadPart.getRightField());
+                }
+            }
+        }
+
+        if (!columnList.get(square.getRaw() - 1).get(square.getColumn()).getClass().equals(EmptySquare.class)) {
+            if (square.getDown().isAvailableForPawn()) {
+                putablePartsList.add(square.getDown());
+            }
+            if (square.getDown().getClass().equals(RoadPart.class)) {
+                RoadPart roadPart= (RoadPart)square.getDown();
+                if (roadPart.getLeftField().isAvailableForPawn()) {
+                    putablePartsList.add(roadPart.getLeftField());
+                }
+                if (roadPart.getRightField().isAvailableForPawn()) {
+                    putablePartsList.add(roadPart.getRightField());
+                }
+            }
+        }
+
+        if (!columnList.get(square.getRaw()).get(square.getColumn() - 1).getClass().equals(EmptySquare.class)) {
+            if (square.getLeft().isAvailableForPawn()) {
+                putablePartsList.add(square.getLeft());
+            }
+            if (square.getLeft().getClass().equals(RoadPart.class)) {
+                RoadPart roadPart= (RoadPart)square.getLeft();
+                if (roadPart.getLeftField().isAvailableForPawn()) {
+                    putablePartsList.add(roadPart.getLeftField());
+                }
+                if (roadPart.getRightField().isAvailableForPawn()) {
+                    putablePartsList.add(roadPart.getRightField());
+                }
+            }
+        }
+
+        return putablePartsList;
     }
 
     public String getSquareToString(int column, int raw) {

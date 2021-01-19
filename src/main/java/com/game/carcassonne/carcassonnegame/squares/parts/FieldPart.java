@@ -8,8 +8,8 @@ public class FieldPart extends Field implements Part {
     private final boolean connectionToTheRight;
     private final boolean connectionAcross;
     private boolean externalConnection = false;
-    private int raw = -1;
-    private int column = -1;
+    private int raw = 99999;
+    private int column = 99999;
     private String position;
 
     public FieldPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross) {

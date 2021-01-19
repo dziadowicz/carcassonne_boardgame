@@ -4,9 +4,17 @@ import com.game.carcassonne.carcassonnegame.players.Player;
 
 public class Field implements Playable{
 
-    @Override
-    public void checkAvailability() {
+    private boolean isTherePawn = false;
 
+    @Override
+    public boolean isAvailableForPawn() {
+
+        return false;
+    }
+
+    @Override
+    public boolean getPawn() {
+        return isTherePawn;
     }
 
     @Override
