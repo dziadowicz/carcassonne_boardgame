@@ -1,5 +1,6 @@
 package com.game.carcassonne.carcassonnegame.squares.parts;
 
+import com.game.carcassonne.carcassonnegame.squares.Playable;
 import com.game.carcassonne.carcassonnegame.squares.Road;
 
 public class RoadPart extends Road implements Part {
@@ -13,6 +14,8 @@ public class RoadPart extends Road implements Part {
     private String position;
     private FieldPart leftField;
     private FieldPart rightField;
+    private Playable master;
+    private boolean isTherePawn = false;
 
     public RoadPart(boolean connectionToTheLeft, boolean connectionToTheRight,
                     boolean connectionAcross, FieldPart leftField, FieldPart rightField) {
@@ -41,6 +44,11 @@ public class RoadPart extends Road implements Part {
 
     public FieldPart getRightField() {
         return rightField;
+    }
+
+    @Override
+    public boolean getIsTherePawn() {
+        return isTherePawn;
     }
 
     @Override
@@ -94,6 +102,16 @@ public class RoadPart extends Road implements Part {
     }
 
     @Override
+    public void setMaster(Playable playable) {
+        master = playable;
+    }
+
+    @Override
+    public Playable getMaster() {
+        return master;
+    }
+
+    @Override
     public String toString() {
         return "RoadPart{" +
                 "connectionToTheLeft=" + connectionToTheLeft +
@@ -106,4 +124,41 @@ public class RoadPart extends Road implements Part {
                 ", rightField=" + rightField +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RoadPart)) return false;
+
+        RoadPart roadPart = (RoadPart) o;
+
+        if (isConnectionToTheLeft() != roadPart.isConnectionToTheLeft()) return false;
+        if (isConnectionToTheRight() != roadPart.isConnectionToTheRight()) return false;
+        if (isConnectionAcross() != roadPart.isConnectionAcross()) return false;
+        if (isExternalConnection() != roadPart.isExternalConnection()) return false;
+        if (getRaw() != roadPart.getRaw()) return false;
+        if (getColumn() != roadPart.getColumn()) return false;
+        if (isTherePawn != roadPart.isTherePawn) return false;
+        if (getPosition() != null ? !getPosition().equals(roadPart.getPosition()) : roadPart.getPosition() != null)
+            return false;
+        if (!getLeftField().equals(roadPart.getLeftField())) return false;
+        if (!getRightField().equals(roadPart.getRightField())) return false;
+        return getMaster() != null ? getMaster().equals(roadPart.getMaster()) : roadPart.getMaster() == null;
+    }
+
+//    @Override
+//    public int hashCode() {
+//        int result = (isConnectionToTheLeft() ? 1 : 0);
+//        result = 31 * result + (isConnectionToTheRight() ? 1 : 0);
+//        result = 31 * result + (isConnectionAcross() ? 1 : 0);
+//        result = 31 * result + (isExternalConnection() ? 1 : 0);
+//        result = 31 * result + getRaw();
+//        result = 31 * result + getColumn();
+//        result = 31 * result + (getPosition() != null ? getPosition().hashCode() : 0);
+//        result = 31 * result + getLeftField().hashCode();
+//        result = 31 * result + getRightField().hashCode();
+//        result = 31 * result + (getMaster() != null ? getMaster().hashCode() : 0);
+//        result = 31 * result + (isTherePawn ? 1 : 0);
+//        return result;
+//    }
 }

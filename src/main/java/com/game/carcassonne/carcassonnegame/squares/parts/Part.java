@@ -16,7 +16,8 @@ public interface Part extends Playable {
     int getColumn();
     void setColumn(int column);
     void setPosition(String position);
-//    void setMaster();
-//    Playable getMaster();
+    void setMaster(Playable playable);
+    Playable getMaster();
     String getPosition();
+    boolean getIsTherePawn();
 }

@@ -1,6 +1,7 @@
 package com.game.carcassonne.carcassonnegame.squares.parts;
 
 import com.game.carcassonne.carcassonnegame.players.Player;
+import com.game.carcassonne.carcassonnegame.squares.Playable;
 
 public class EmptyPart implements Part{
     @Override
@@ -12,6 +13,11 @@ public class EmptyPart implements Part{
     @Override
     public void putPawn(Player player) {
 
+    }
+
+    @Override
+    public boolean getIsTherePawn() {
+        return false;
     }
 
     @Override
@@ -71,6 +77,21 @@ public class EmptyPart implements Part{
 
     @Override
     public String getPosition() {
+        return null;
+    }
+
+    @Override
+    public boolean getPawn() {
+        return false;
+    }
+
+    @Override
+    public void setMaster(Playable playable) {
+
+    }
+
+    @Override
+    public Playable getMaster() {
         return null;
     }
 }

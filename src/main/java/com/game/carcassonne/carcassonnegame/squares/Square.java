@@ -157,4 +157,32 @@ public class Square implements Squares {
                 ", " + monastery +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Square)) return false;
+
+        Square square = (Square) o;
+
+        if (getColumn() != square.getColumn()) return false;
+        if (getRaw() != square.getRaw()) return false;
+        if (getUp() != null ? !getUp().equals(square.getUp()) : square.getUp() != null) return false;
+        if (getLeft() != null ? !getLeft().equals(square.getLeft()) : square.getLeft() != null) return false;
+        if (getRight() != null ? !getRight().equals(square.getRight()) : square.getRight() != null) return false;
+        if (getDown() != null ? !getDown().equals(square.getDown()) : square.getDown() != null) return false;
+        return getMonastery() != null ? getMonastery().equals(square.getMonastery()) : square.getMonastery() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getUp() != null ? getUp().hashCode() : 0;
+        result = 31 * result + (getLeft() != null ? getLeft().hashCode() : 0);
+        result = 31 * result + (getRight() != null ? getRight().hashCode() : 0);
+        result = 31 * result + (getDown() != null ? getDown().hashCode() : 0);
+        result = 31 * result + (getMonastery() != null ? getMonastery().hashCode() : 0);
+        result = 31 * result + getColumn();
+        result = 31 * result + getRaw();
+        return result;
+    }
 }

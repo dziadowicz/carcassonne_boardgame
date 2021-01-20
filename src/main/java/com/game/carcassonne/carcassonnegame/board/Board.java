@@ -4,15 +4,18 @@ import com.game.carcassonne.carcassonnegame.squares.*;
 import com.game.carcassonne.carcassonnegame.squares.parts.Part;
 import com.game.carcassonne.carcassonnegame.squares.parts.RoadPart;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Board {
 
     private List<List<Squares>> columnList = new ArrayList<>();
     private int boardSize;
     private List<Squares> availableSquaresList = new ArrayList<>();
+    List<Set<Playable>> mastersList = new ArrayList<>();
+    Set<Playable> citiSet = new HashSet<>();
+    Set<Playable> fieldSet = new HashSet<>();
+    Set<Playable> monasterySet = new HashSet<>();
+    Set<Playable> roadSet = new HashSet<>();
 
     public Board(int boardSize) {
         this.boardSize = boardSize;
@@ -78,15 +81,49 @@ public class Board {
 
     public void createNewBoard() {
 
+        mastersList.add(citiSet);
+        mastersList.add(fieldSet);
+        mastersList.add(monasterySet);
+        mastersList.add(roadSet);
+
         for (int i = 0; i < boardSize; i++) {
             columnList.add(new ArrayList<>());
             for (int j = 0; j < boardSize; j++) {
                 columnList.get(i).add(new EmptySquare(j, i));
             }
         }
-        columnList.get(boardSize/2).set(boardSize/2, SquareList.getStartingSquare());
-        SquareList.getStartingSquare().setColumn(boardSize/2);
-        SquareList.getStartingSquare().setRaw(boardSize/2);
+        Square square = SquareList.getStartingSquare();
+        columnList.get(boardSize/2).set(boardSize/2, square);
+        square.setColumn(boardSize/2);
+        square.setRaw(boardSize/2);
+
+        Citi citi = new Citi();
+        square.getUp().setMaster(citi);
+        citi.setPartsSet(square.getUp());
+        citiSet.add(citi);
+
+        Road road = new Road();
+        square.getLeft().setMaster(road);
+        square.getRight().setMaster(road);
+        road.setPartsSet(square.getLeft());
+        road.setPartsSet(square.getRight());
+        roadSet.add(road);
+
+        Field field1 = new Field();
+        RoadPart roadPart1 = (RoadPart) square.getLeft();
+        RoadPart roadPart2 = (RoadPart) square.getRight();
+        roadPart1.getLeftField().setMaster(field1);
+        roadPart2.getRightField().setMaster(field1);
+        field1.setPartsSet(roadPart1.getLeftField());
+        field1.setPartsSet(roadPart2.getRightField());
+
+        Field field2 = new Field();
+        roadPart1.getRightField().setMaster(field2);
+        roadPart2.getLeftField().setMaster(field2);
+        square.getDown().setMaster(field2);
+        field2.setPartsSet(roadPart1.getRightField());
+        field2.setPartsSet(roadPart2.getLeftField());
+        field2.setPartsSet(square.getDown());
     }
 
     public boolean doesItFit(int column, int raw, Squares square) {
