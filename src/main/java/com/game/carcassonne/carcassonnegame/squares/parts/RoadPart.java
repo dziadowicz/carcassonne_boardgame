@@ -1,5 +1,7 @@
 package com.game.carcassonne.carcassonnegame.squares.parts;
 
+import com.game.carcassonne.carcassonnegame.players.Pawn;
+import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Playable;
 import com.game.carcassonne.carcassonnegame.squares.Road;
 
@@ -16,6 +18,7 @@ public class RoadPart extends Road implements Part {
     private FieldPart rightField;
     private Playable master;
     private boolean isTherePawn = false;
+    private Pawn pawn;
 
     public RoadPart(boolean connectionToTheLeft, boolean connectionToTheRight,
                     boolean connectionAcross, FieldPart leftField, FieldPart rightField) {
@@ -49,6 +52,13 @@ public class RoadPart extends Road implements Part {
     @Override
     public boolean getIsTherePawn() {
         return isTherePawn;
+    }
+
+    @Override
+    public void putPawn(Player player) {
+        isTherePawn = true;
+        pawn = new Pawn(player, this);
+        player.setNumberOfPawns(player.getNumberOfPawns()-1);
     }
 
     @Override

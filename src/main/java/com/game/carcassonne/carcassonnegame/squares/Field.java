@@ -1,15 +1,19 @@
 package com.game.carcassonne.carcassonnegame.squares;
 
+import com.game.carcassonne.carcassonnegame.players.Pawn;
 import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.parts.Part;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Field implements Playable{
 
     private boolean isTherePawn = false;
     private Set<Part> partsSet = new HashSet<>();
+    private List<Pawn> pawnList = new ArrayList<>();
 
     public Set<Part> getPartsSet() {
         return partsSet;
@@ -26,13 +30,24 @@ public class Field implements Playable{
     }
 
     @Override
-    public boolean getPawn() {
-        return isTherePawn;
+    public List<Pawn> getPawnList() {
+        return pawnList;
     }
 
     @Override
-    public void putPawn(Player player) {
+    public boolean isTherePawn() {
 
+        if (pawnList.size() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void putPawn(Player player, Part part) {
+        pawnList.add(new Pawn(player, part));
+        part.putPawn(player);
     }
 
     @Override

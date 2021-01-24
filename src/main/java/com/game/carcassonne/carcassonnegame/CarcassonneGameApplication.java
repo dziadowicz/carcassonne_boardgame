@@ -15,20 +15,20 @@ public class CarcassonneGameApplication {
 
     public static void main(String[] args) {
 
-        Set<Square> set = new HashSet<>();
-        List<Square> list = new ArrayList<>();
-        Square a = SquareList.getStartingSquare();
-        Square b = Square.copyAndTurnRightSquare(a);
-        Square c = Square.copyAndTurnLeftSquare(a);
-        set.add(a);
-        set.add(b);
-        set.add(c);
-        list.add(a);
-        list.add(b);
-        list.add(c);
-        System.out.println(set.size() + " " + list.size());
-        List<Object> squareList = set.toArray();
-        System.out.println(set.size() + " " + list.size());
+//        Set<Square> set = new HashSet<>();
+//        List<Square> list = new ArrayList<>();
+//        Square a = SquareList.getStartingSquare();
+//        Square b = Square.copyAndTurnRightSquare(a);
+//        Square c = Square.copyAndTurnLeftSquare(a);
+//        set.add(a);
+//        set.add(b);
+//        set.add(c);
+//        list.add(a);
+//        list.add(b);
+//        list.add(c);
+//        System.out.println(set.size() + " " + list.size());
+//        List<Square> squareList = set.toArray();
+//        System.out.println(set.size() + " " + list.size());
 
 
             Game game = new Game(4);

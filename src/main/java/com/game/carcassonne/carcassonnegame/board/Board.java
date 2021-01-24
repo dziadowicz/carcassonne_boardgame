@@ -11,6 +11,7 @@ public class Board {
     private List<List<Squares>> columnList = new ArrayList<>();
     private int boardSize;
     private List<Squares> availableSquaresList = new ArrayList<>();
+    private List<Part> allPartsList = new ArrayList<>();
     List<Set<Playable>> mastersList = new ArrayList<>();
     Set<Playable> citiSet = new HashSet<>();
     Set<Playable> fieldSet = new HashSet<>();
@@ -33,6 +34,14 @@ public class Board {
                 }
             }
         }
+    }
+
+    public List<Part> getAllPartsList() {
+        return allPartsList;
+    }
+
+    public void setAllPartsList(Part part) {
+        allPartsList.add(part);
     }
 
     public boolean isThereAnyPossibleMove(Square square) {
@@ -96,10 +105,11 @@ public class Board {
         columnList.get(boardSize/2).set(boardSize/2, square);
         square.setColumn(boardSize/2);
         square.setRaw(boardSize/2);
+        square.addPartsToAllPartsList(this);
 
         Citi citi = new Citi();
         square.getUp().setMaster(citi);
-        citi.setPartsSet(square.getUp());
+        citi.setPartsList(square.getUp());
         citiSet.add(citi);
 
         Road road = new Road();
@@ -174,6 +184,7 @@ public class Board {
                 square.getDown().setExternalConnection();
                 columnList.get(raw - 1).get(column).getUp().setExternalConnection();
             }
+            square.addPartsToAllPartsList(this);
             return true;
         } else {
             throw new WrongPutException();

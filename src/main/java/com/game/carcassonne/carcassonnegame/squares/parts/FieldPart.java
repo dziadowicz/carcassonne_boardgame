@@ -1,5 +1,7 @@
 package com.game.carcassonne.carcassonnegame.squares.parts;
 
+import com.game.carcassonne.carcassonnegame.players.Pawn;
+import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Field;
 import com.game.carcassonne.carcassonnegame.squares.Playable;
 
@@ -14,6 +16,8 @@ public class FieldPart extends Field implements Part {
     private String position;
     private Playable master;
     private boolean isTherePawn = false;
+    private Pawn pawn;
+
 
     public FieldPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross) {
         this.connectionToTheLeft = connectionToTheLeft;
@@ -34,6 +38,13 @@ public class FieldPart extends Field implements Part {
     @Override
     public boolean getIsTherePawn() {
         return isTherePawn;
+    }
+
+    @Override
+    public void putPawn(Player player) {
+        isTherePawn = true;
+        pawn = new Pawn(player, this);
+        player.setNumberOfPawns(player.getNumberOfPawns()-1);
     }
 
     @Override

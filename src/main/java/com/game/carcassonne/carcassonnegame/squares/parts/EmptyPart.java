@@ -1,12 +1,30 @@
 package com.game.carcassonne.carcassonnegame.squares.parts;
 
+import com.game.carcassonne.carcassonnegame.players.Pawn;
 import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Playable;
+
+import java.util.List;
 
 public class EmptyPart implements Part{
     @Override
     public boolean isAvailableForPawn() {
 
+        return false;
+    }
+
+    @Override
+    public void putPawn(Player player, Part part) {
+
+    }
+
+    @Override
+    public List<Pawn> getPawnList() {
+        return null;
+    }
+
+    @Override
+    public boolean isTherePawn() {
         return false;
     }
 
@@ -80,15 +98,14 @@ public class EmptyPart implements Part{
         return null;
     }
 
-    @Override
-    public boolean getPawn() {
-        return false;
-    }
+
 
     @Override
     public void setMaster(Playable playable) {
 
     }
+
+
 
     @Override
     public Playable getMaster() {

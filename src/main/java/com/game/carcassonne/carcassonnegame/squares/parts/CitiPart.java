@@ -1,5 +1,6 @@
 package com.game.carcassonne.carcassonnegame.squares.parts;
 
+import com.game.carcassonne.carcassonnegame.players.Pawn;
 import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Citi;
 import com.game.carcassonne.carcassonnegame.squares.Playable;
@@ -17,6 +18,7 @@ public class CitiPart extends Citi implements Part {
     private String position;
     private boolean isTherePawn = false;
     private Playable master;
+    private Pawn pawn;
 
     public CitiPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross, boolean shield) {
         this.connectionToTheLeft = connectionToTheLeft;
@@ -48,6 +50,8 @@ public class CitiPart extends Citi implements Part {
     @Override
     public void putPawn(Player player) {
         isTherePawn = true;
+        pawn = new Pawn(player, this);
+        player.setNumberOfPawns(player.getNumberOfPawns()-1);
     }
 
     @Override

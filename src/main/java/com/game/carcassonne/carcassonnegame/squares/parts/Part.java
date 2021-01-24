@@ -1,6 +1,7 @@
 package com.game.carcassonne.carcassonnegame.squares.parts;
 
 import com.game.carcassonne.carcassonnegame.board.Board;
+import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Playable;
 import com.game.carcassonne.carcassonnegame.squares.Square;
 
@@ -20,4 +21,5 @@ public interface Part extends Playable {
     Playable getMaster();
     String getPosition();
     boolean getIsTherePawn();
+    void putPawn(Player player);
 }

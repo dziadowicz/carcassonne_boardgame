@@ -1,24 +1,36 @@
 package com.game.carcassonne.carcassonnegame.squares;
 
+import com.game.carcassonne.carcassonnegame.players.Pawn;
 import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.parts.Part;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Citi implements Removable{
 
-    private Set<Part> partsSet = new HashSet<>();
+    private List<Part> partsList = new ArrayList<>();
+    private List<Pawn> pawnList = new ArrayList<>();
 
-    public Set<Part> getPartsSet() {
-        return partsSet;
+    public List<Part> getPartsList() {
+        return partsList;
     }
 
-    public void setPartsSet(Part part) {
-        partsSet.add(part);
+    public void setPartsList(Part part) {
+        partsList.add(part);
     }
 
-    private boolean isTherePawn = false;
+    @Override
+    public boolean isTherePawn(){
+
+        if (pawnList.size() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     @Override
     public boolean isAvailableForPawn() {
@@ -27,13 +39,14 @@ public class Citi implements Removable{
     }
 
     @Override
-    public void putPawn(Player player) {
-
+    public void putPawn(Player player, Part part) {
+        pawnList.add(new Pawn(player, part));
+        part.putPawn(player);
     }
 
     @Override
-    public boolean getPawn() {
-        return isTherePawn;
+    public List<Pawn> getPawnList() {
+        return pawnList;
     }
 
     @Override
@@ -53,8 +66,8 @@ public class Citi implements Removable{
 
         Citi citi = (Citi) o;
 
-        if (isTherePawn != citi.isTherePawn) return false;
-        return getPartsSet() != null ? getPartsSet().equals(citi.getPartsSet()) : citi.getPartsSet() == null;
+        if (isTherePawn() != citi.isTherePawn()) return false;
+        return getPartsList() != null ? getPartsList().equals(citi.getPartsList()) : citi.getPartsList() == null;
     }
 
 //    @Override
