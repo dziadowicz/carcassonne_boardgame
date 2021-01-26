@@ -41,15 +41,15 @@ public class Square implements Squares {
     }
 
     public int getRaw() {
+        return raw;
+    }
+
+    public void setRaw(int raw) {
         getLeft().setRaw(raw);
         getRight().setRaw(raw);
         getUp().setRaw(raw);
         getDown().setRaw(raw);
 
-        return raw;
-    }
-
-    public void setRaw(int raw) {
         this.raw = raw;
     }
 
@@ -170,6 +170,9 @@ public class Square implements Squares {
             RoadPart roadPart = (RoadPart) down;
             board.setAllPartsList(roadPart.getLeftField());
             board.setAllPartsList(roadPart.getRightField());
+        }
+        if (isThereMonastery()) {
+            board.setMonasteryList(monastery);
         }
     }
 

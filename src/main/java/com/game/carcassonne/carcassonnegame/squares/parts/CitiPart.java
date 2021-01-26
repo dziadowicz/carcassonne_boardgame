@@ -1,5 +1,6 @@
 package com.game.carcassonne.carcassonnegame.squares.parts;
 
+import com.game.carcassonne.carcassonnegame.board.Board;
 import com.game.carcassonne.carcassonnegame.players.Pawn;
 import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Citi;
@@ -106,6 +107,20 @@ public class CitiPart extends Citi implements Part {
     @Override
     public boolean isConnectionAcross() {
         return connectionAcross;
+    }
+
+    @Override
+    public boolean isAvailableForPawn(Board board) {
+
+        Playable playable;
+
+        for (Playable master : board.getMastersList()
+             ) {
+            if (master.getPartsList().contains(this)) {
+                playable = master;
+            }
+        }
+        return playable.isAvailableForPawn(board);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class Road implements Removable {
     }
 
     @Override
-    public void removePawn() {
+    public void closeAndRemovePawns() {
 
     }
 

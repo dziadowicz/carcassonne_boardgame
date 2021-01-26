@@ -56,7 +56,7 @@ public class Monastery implements Removable {
     }
 
     @Override
-    public void removePawn() {
+    public void closeAndRemovePawns() {
 
     }
 

@@ -1,5 +1,6 @@
 package com.game.carcassonne.carcassonnegame.squares;
 
+import com.game.carcassonne.carcassonnegame.board.Board;
 import com.game.carcassonne.carcassonnegame.players.Pawn;
 import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.parts.Part;
@@ -33,9 +34,8 @@ public class Citi implements Removable{
     }
 
     @Override
-    public boolean isAvailableForPawn() {
-
-        return false;
+    public boolean isAvailableForPawn(Board board) {
+        return !isTherePawn();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Citi implements Removable{
     }
 
     @Override
-    public void removePawn() {
+    public void closeAndRemovePawns() {
 
     }
 
