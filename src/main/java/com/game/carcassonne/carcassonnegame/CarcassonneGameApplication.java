@@ -6,11 +6,19 @@ import com.game.carcassonne.carcassonnegame.squares.Square;
 import com.game.carcassonne.carcassonnegame.squares.SquareList;
 import com.game.carcassonne.carcassonnegame.squares.parts.CitiPart;
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import java.awt.*;
+//import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,41 +26,58 @@ import java.util.Set;
 
 
 
-public class CarcassonneGameApplication {
+public class CarcassonneGameApplication extends Application {
 
-//    @Override
-//    public void start(Stage primaryStage) throws Exception {
-//        Group root = new Group();
-//        Scene scene = new Scene(root, 300, 300, Color.BLACK);
-//
-//        Rectangle r = new Rectangle(25,25,250,250);
-//        scene.setFill(Color.BLUE);
-//
-//        root.getChildren().add(r);
-//        primaryStage.setTitle("BlackJack");
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
-//    }
+    private Image imageback = new Image("file:src/main/resources/wallpaper.jpg");
+    private Image card = new Image("file:src/main/resources/squares/S_00.png");
+    private FlowPane cards = new FlowPane(Orientation.HORIZONTAL);
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
+        BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        Background background = new Background(backgroundImage);
+
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
+        grid.setHgap(5.5);
+        grid.setVgap(5.5);
+        grid.setBackground(background);
+
+        ImageView img = new ImageView(card);
+        img.setFitHeight(50);
+        img.setFitWidth(50);
+        img.setRotate(90);
+        cards.getChildren().add(img);
+
+        grid.add(cards, 0, 0, 100, 100);
+
+        Scene scene = new Scene(grid, 1000, 600, Color.BLACK);
+
+        primaryStage.setTitle("BlackJack");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 
 
-//    public CarcassonneGameApplication() {
-//        super();
-//    }
-//
-//    @Override
-//    public void init() throws Exception {
-//        super.init();
-//    }
-//
-//    @Override
-//    public void stop() throws Exception {
-//        super.stop();
-//    }
-//
-//    @Override
-//    public void start(Stage primaryStage) throws Exception {
-//
-//    }
+
+    public CarcassonneGameApplication() {
+        super();
+    }
+
+    @Override
+    public void init() throws Exception {
+        super.init();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+    }
+
+
+
 
     public static void main(String[] args) {
 
@@ -71,13 +96,13 @@ public class CarcassonneGameApplication {
 //        List<Square> squareList = set.toArray();
 //        System.out.println(set.size() + " " + list.size());
 
+        launch(args);
 
-
-        Game game = new Game(4);
+/*        Game game = new Game(4);
         try {
             game.newGame();
         } catch (WrongPlayersNumberException e) {
             System.out.println("Incorrect number of players");
-        }
+        }*/
     }
 }
