@@ -5,7 +5,7 @@ import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Playable;
 import com.game.carcassonne.carcassonnegame.squares.Square;
 
-public interface Part extends Playable {
+public interface Connectible extends Playable {
 
     boolean isExternalConnection();
     void setExternalConnection();

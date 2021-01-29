@@ -5,9 +5,8 @@ import com.game.carcassonne.carcassonnegame.players.Pawn;
 import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Citi;
 import com.game.carcassonne.carcassonnegame.squares.Playable;
-import com.game.carcassonne.carcassonnegame.squares.Square;
 
-public class CitiPart extends Citi implements Part {
+public class CitiPart extends Citi implements Connectible {
 
     private final boolean connectionToTheLeft;
     private final boolean connectionToTheRight;
@@ -112,15 +111,15 @@ public class CitiPart extends Citi implements Part {
     @Override
     public boolean isAvailableForPawn(Board board) {
 
-        Playable playable;
+        boolean result = false;
 
         for (Playable master : board.getMastersList()
              ) {
             if (master.getPartsList().contains(this)) {
-                playable = master;
+                result = master.isAvailableForPawn(board);
             }
         }
-        return playable.isAvailableForPawn(board);
+        return result;
     }
 
     @Override

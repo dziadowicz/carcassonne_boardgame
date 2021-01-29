@@ -5,7 +5,7 @@ import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Playable;
 import com.game.carcassonne.carcassonnegame.squares.Road;
 
-public class RoadPart extends Road implements Part {
+public class RoadPart extends Road implements Connectible {
 
     private final boolean connectionToTheLeft;
     private final boolean connectionToTheRight;

@@ -1,8 +1,9 @@
 package com.game.carcassonne.carcassonnegame.squares;
 
+import com.game.carcassonne.carcassonnegame.board.Board;
 import com.game.carcassonne.carcassonnegame.players.Pawn;
 import com.game.carcassonne.carcassonnegame.players.Player;
-import com.game.carcassonne.carcassonnegame.squares.parts.Part;
+import com.game.carcassonne.carcassonnegame.squares.parts.Connectible;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,11 +12,11 @@ import java.util.Set;
 
 public class Road implements Removable {
 
-    private Set<Part> partsSet = new HashSet<>();
+    private Set<Connectible> partsSet = new HashSet<>();
     private boolean isTherePawn = false;
     private List<Pawn> pawnList = new ArrayList<>();
 
-    public Set<Part> getPartsSet() {
+    public Set<Connectible> getPartsSet() {
         return partsSet;
     }
 
@@ -34,8 +35,8 @@ public class Road implements Removable {
         }
     }
 
-    public void setPartsSet(Part part) {
-        partsSet.add(part);
+    public void setPartsSet(Connectible connectible) {
+        partsSet.add(connectible);
     }
 
     @Override
@@ -49,15 +50,14 @@ public class Road implements Removable {
     }
 
     @Override
-    public boolean isAvailableForPawn() {
-
-        return false;
+    public boolean isAvailableForPawn(Board board) {
+        return !isTherePawn();
     }
 
     @Override
-    public void putPawn(Player player, Part part) {
-        pawnList.add(new Pawn(player, part));
-        part.putPawn(player);
+    public void putPawn(Player player, Connectible connectible) {
+        pawnList.add(new Pawn(player, connectible));
+        connectible.putPawn(player);
     }
 
     @Override
@@ -71,7 +71,17 @@ public class Road implements Removable {
         return getPartsSet() != null ? getPartsSet().equals(road.getPartsSet()) : road.getPartsSet() == null;
     }
 
-//    @Override
+    @Override
+    public List<Connectible> getPartsList() {
+        return null;
+    }
+
+    @Override
+    public void calculate(Connectible connectible) {
+
+    }
+
+    //    @Override
 //    public int hashCode() {
 //        int result = getPartsSet() != null ? getPartsSet().hashCode() : 0;
 //        result = 31 * result + (isTherePawn ? 1 : 0);

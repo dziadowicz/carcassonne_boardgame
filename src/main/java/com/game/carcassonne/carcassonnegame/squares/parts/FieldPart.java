@@ -5,7 +5,7 @@ import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Field;
 import com.game.carcassonne.carcassonnegame.squares.Playable;
 
-public class FieldPart extends Field implements Part {
+public class FieldPart extends Field implements Connectible {
 
     private final boolean connectionToTheLeft;
     private final boolean connectionToTheRight;

@@ -1,9 +1,9 @@
 package com.game.carcassonne.carcassonnegame.squares;
 
 import com.game.carcassonne.carcassonnegame.squares.parts.EmptyPart;
-import com.game.carcassonne.carcassonnegame.squares.parts.Part;
+import com.game.carcassonne.carcassonnegame.squares.parts.Connectible;
 
-public class EmptySquare implements Squares{
+public class EmptySquare implements Measurable {
 
     private int column;
     private int raw;
@@ -24,22 +24,22 @@ public class EmptySquare implements Squares{
     }
 
     @Override
-    public Part getUp() {
+    public Connectible getUp() {
         return new EmptyPart();
     }
 
     @Override
-    public Part getLeft() {
+    public Connectible getLeft() {
         return new EmptyPart();
     }
 
     @Override
-    public Part getRight() {
+    public Connectible getRight() {
         return new EmptyPart();
     }
 
     @Override
-    public Part getDown() {
+    public Connectible getDown() {
         return new EmptyPart();
     }
 

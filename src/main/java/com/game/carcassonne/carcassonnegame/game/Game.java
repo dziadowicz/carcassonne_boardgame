@@ -1,18 +1,14 @@
 package com.game.carcassonne.carcassonnegame.game;
 
 import com.game.carcassonne.carcassonnegame.board.Board;
-import com.game.carcassonne.carcassonnegame.board.WrongPutException;
 import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.players.PlayerList;
 import com.game.carcassonne.carcassonnegame.players.WrongPlayersNumberException;
 import com.game.carcassonne.carcassonnegame.squares.Square;
 import com.game.carcassonne.carcassonnegame.squares.SquareList;
-import com.game.carcassonne.carcassonnegame.squares.Squares;
 
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
-import java.util.Random;
 
 public class Game {
 

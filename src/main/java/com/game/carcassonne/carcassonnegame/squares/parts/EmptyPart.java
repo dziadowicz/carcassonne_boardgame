@@ -1,20 +1,20 @@
 package com.game.carcassonne.carcassonnegame.squares.parts;
 
+import com.game.carcassonne.carcassonnegame.board.Board;
 import com.game.carcassonne.carcassonnegame.players.Pawn;
 import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Playable;
 
 import java.util.List;
 
-public class EmptyPart implements Part{
+public class EmptyPart implements Connectible {
     @Override
-    public boolean isAvailableForPawn() {
-
+    public boolean isAvailableForPawn(Board board) {
         return false;
     }
 
     @Override
-    public void putPawn(Player player, Part part) {
+    public void putPawn(Player player, Connectible connectible) {
 
     }
 
@@ -105,7 +105,15 @@ public class EmptyPart implements Part{
 
     }
 
+    @Override
+    public List<Connectible> getPartsList() {
+        return null;
+    }
 
+    @Override
+    public void calculate(Connectible connectible) {
+
+    }
 
     @Override
     public Playable getMaster() {

@@ -3,17 +3,17 @@ package com.game.carcassonne.carcassonnegame.squares;
 import com.game.carcassonne.carcassonnegame.board.Board;
 import com.game.carcassonne.carcassonnegame.squares.parts.*;
 
-public class Square implements Squares {
+public class Square implements Measurable {
 
-    private final Part up;
-    private final Part left;
-    private final Part right;
-    private final Part down;
+    private final Connectible up;
+    private final Connectible left;
+    private final Connectible right;
+    private final Connectible down;
     private final Monastery monastery;
     private int column;
     private int raw;
 
-    public Square(Part up, Part left, Part right, Part down, Monastery monastery) {
+    public Square(Connectible up, Connectible left, Connectible right, Connectible down, Monastery monastery) {
         this.up = up;
         this.left = left;
         this.right = right;
@@ -54,10 +54,10 @@ public class Square implements Squares {
     }
 
     public static Square copySquare(Square square) {
-        Part up;
-        Part left;
-        Part down;
-        Part right;
+        Connectible up;
+        Connectible left;
+        Connectible down;
+        Connectible right;
 
         if (square.getUp().getClass() == CitiPart.class) {
             CitiPart citiPart = (CitiPart) square.getUp();
@@ -119,22 +119,22 @@ public class Square implements Squares {
     }
 
     @Override
-    public Part getUp() {
+    public Connectible getUp() {
         return up;
     }
 
     @Override
-    public Part getLeft() {
+    public Connectible getLeft() {
         return left;
     }
 
     @Override
-    public Part getRight() {
+    public Connectible getRight() {
         return right;
     }
 
     @Override
-    public Part getDown() {
+    public Connectible getDown() {
         return down;
     }
 

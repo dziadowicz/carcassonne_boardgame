@@ -2,13 +2,10 @@ package com.game.carcassonne.carcassonnegame.players;
 
 import com.game.carcassonne.carcassonnegame.board.Board;
 import com.game.carcassonne.carcassonnegame.board.WrongPutException;
-import com.game.carcassonne.carcassonnegame.squares.EmptySquare;
 import com.game.carcassonne.carcassonnegame.squares.Square;
-import com.game.carcassonne.carcassonnegame.squares.Squares;
 import com.game.carcassonne.carcassonnegame.squares.parts.EmptyPart;
-import com.game.carcassonne.carcassonnegame.squares.parts.Part;
+import com.game.carcassonne.carcassonnegame.squares.parts.Connectible;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -58,7 +55,7 @@ public class Player {
             } else if (input.indexOf(":") == 1 || input.indexOf(":") == 2) {
                 int colon = input.indexOf(":");
                 column = Integer.parseInt(input.substring(0, colon));
-                raw = Integer.parseInt(input.substring(colon+1));
+                raw = Integer.parseInt(input.substring(colon+1)); //exception
                 i = 9;
             } else {
                 System.out.println("Wrong input. Try again.");
@@ -69,11 +66,11 @@ public class Player {
         return square;
     }
 
-    public Part setPawnPosition(Board board, Square square) {
-        List<Part> putablePartsList = board.setPutablePartsList(square);
+    public Connectible setPawnPosition(Board board, Square square) {
+        List<Connectible> putablePartsList = board.setPutablePartsList(square);
         int i = 0;
         int n = 0;
-        Part part = new EmptyPart();
+        Connectible connectible = new EmptyPart();
         if (putablePartsList.size() > 0 && numberOfPawns > 0) {
             System.out.println("\nType \"next\" until part where you are interested to put your pawn will be written and then type \"this\" to choose, or type \"none\" if you don't want to put any pawn");
             while (i == 0) {
@@ -81,7 +78,7 @@ public class Player {
                 Scanner in = new Scanner(System.in);
                 String input = in.nextLine();
                 if (input.equals("this")) {
-                    part = putablePartsList.get(n);
+                    connectible = putablePartsList.get(n);
                     i = 9;
                 } else if (input.equals("next")) {
                     if (n < putablePartsList.size() - 1) {
@@ -98,7 +95,7 @@ public class Player {
         } else {
             System.out.println("You are not able to put any pawn.");
         }
-            return part;
+            return connectible;
     }
 
     public void turn(Board board, Square square) {
@@ -112,9 +109,9 @@ public class Player {
             System.out.println(e);
         }
         System.out.println(column + ":" + raw + square);
-        Part part = setPawnPosition(board, square);
+        Connectible connectible = setPawnPosition(board, square);
 
-        System.out.println(part);
+        System.out.println(connectible);
 
 //        if (!part.getClass().equals(EmptyPart.class)) {
 //            square.putPawn(part);

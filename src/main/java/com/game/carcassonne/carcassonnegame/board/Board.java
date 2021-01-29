@@ -3,17 +3,17 @@ package com.game.carcassonne.carcassonnegame.board;
 import com.game.carcassonne.carcassonnegame.squares.*;
 import com.game.carcassonne.carcassonnegame.squares.parts.CitiPart;
 import com.game.carcassonne.carcassonnegame.squares.parts.FieldPart;
-import com.game.carcassonne.carcassonnegame.squares.parts.Part;
+import com.game.carcassonne.carcassonnegame.squares.parts.Connectible;
 import com.game.carcassonne.carcassonnegame.squares.parts.RoadPart;
 
 import java.util.*;
 
 public class Board {
 
-    private List<List<Squares>> columnList = new ArrayList<>();
+    private List<List<Measurable>> columnList = new ArrayList<>();
     private int boardSize;
-    private List<Squares> availableSquaresList = new ArrayList<>();
-    private List<Part> allPartsList = new ArrayList<>();
+    private List<Measurable> availableSquaresList = new ArrayList<>();
+    private List<Connectible> allPartsList = new ArrayList<>();
     List<Playable> mastersList = new ArrayList<>();
     List<Monastery> monasteryList = new ArrayList<>();
 
@@ -47,24 +47,24 @@ public class Board {
     public void setMastersList() {
         mastersList.clear();
 
-        for (Part part : allPartsList) {
+        for (Connectible connectible : allPartsList) {
             boolean check = false;
             for (Playable master : mastersList) {
-                if (master.getPartsList().contains(part)) {
+                if (master.getPartsList().contains(connectible)) {
                     check = true;
                 }
                 if (!check) {
-                    if (part.getClass().equals(CitiPart.class)) {
+                    if (connectible.getClass().equals(CitiPart.class)) {
                         mastersList.add(new Citi());
-                        mastersList.get(mastersList.size()-1).calculate(part);
+                        mastersList.get(mastersList.size()-1).calculate(connectible);
                     }
-                    if (part.getClass().equals(FieldPart.class)) {
+                    if (connectible.getClass().equals(FieldPart.class)) {
                         mastersList.add(new Field());
-                        mastersList.get(mastersList.size()-1).calculate(part);
+                        mastersList.get(mastersList.size()-1).calculate(connectible);
                     }
-                    if (part.getClass().equals(RoadPart.class)) {
+                    if (connectible.getClass().equals(RoadPart.class)) {
                         mastersList.add(new Road());
-                        mastersList.get(mastersList.size()-1).calculate(part);
+                        mastersList.get(mastersList.size()-1).calculate(connectible);
                     }
                 }
             }
@@ -93,12 +93,12 @@ public class Board {
         }
     }
 
-    public List<Part> getAllPartsList() {
+    public List<Connectible> getAllPartsList() {
         return allPartsList;
     }
 
-    public void setAllPartsList(Part part) {
-        allPartsList.add(part);
+    public void setAllPartsList(Connectible connectible) {
+        allPartsList.add(connectible);
     }
 
     public boolean isThereAnyPossibleMove(Square square) {
@@ -121,7 +121,7 @@ public class Board {
         availableSquaresList.clear();
         setAvailableSquaresList(square);
         if (availableSquaresList.size() > 0) {
-            Squares availableEmptySquare = availableSquaresList.get(new Random().nextInt(availableSquaresList.size()));
+            Measurable availableEmptySquare = availableSquaresList.get(new Random().nextInt(availableSquaresList.size()));
             try {
                 square.setColumn(availableEmptySquare.getColumn());
                 square.setRaw(availableEmptySquare.getRaw());
@@ -133,7 +133,7 @@ public class Board {
         } else {return false;}
     }
 
-    public List<Squares> getAvailableSquaresList() {
+    public List<Measurable> getAvailableSquaresList() {
         return availableSquaresList;
     }
 
@@ -141,7 +141,7 @@ public class Board {
         return boardSize;
     }
 
-    public List<List<Squares>> getColumnList() {
+    public List<List<Measurable>> getColumnList() {
         return columnList;
     }
 
@@ -186,7 +186,7 @@ public class Board {
         field2.setPartsSet(square.getDown());
     }
 
-    public boolean doesItFit(int column, int raw, Squares square) {
+    public boolean doesItFit(int column, int raw, Measurable square) {
         if (column != 0 && column != (boardSize-1) && raw != 0 && raw != (boardSize-1)) {
             boolean isAvailable = columnList.get(raw).get(column).getClass().equals(EmptySquare.class);
             boolean isConnected = !(columnList.get(raw + 1).get(column).getClass().equals(EmptySquare.class) &&
@@ -247,14 +247,14 @@ public class Board {
 
         System.out.println("The square can be located in: ");
 
-        for (Squares squares: availableSquaresList) {
-            System.out.print(squares.getColumn() + ":" + squares.getRaw() + " | ");
+        for (Measurable measurable : availableSquaresList) {
+            System.out.print(measurable.getColumn() + ":" + measurable.getRaw() + " | ");
         }
     }
 
-    public List<Part> setPutablePartsList(Square square) {
+    public List<Connectible> setPutablePartsList(Square square) {
 
-        List<Part> putablePartsList = new ArrayList<>();
+        List<Connectible> putablePartsList = new ArrayList<>();
 
         if (!columnList.get(square.getRaw()).get(square.getColumn() + 1).getClass().equals(EmptySquare.class)) {
             if (square.getRight().isAvailableForPawn(this)) {
@@ -323,7 +323,7 @@ public class Board {
         return columnList.get(raw).get(column).toString();
     }
 
-    public Squares getSquare(int column, int raw) {
+    public Measurable getSquare(int column, int raw) {
         return columnList.get(raw).get(column);
     }
 }
