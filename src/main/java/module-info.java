@@ -5,4 +5,5 @@ module carcassonne.game.main {
     requires javafx.base;
 
     exports com.game.carcassonne.carcassonnegame;
+    exports com.game.carcassonne.carcassonnegame.visual;
 }
