@@ -62,7 +62,7 @@ public class Player {
             }
         }
         square.setColumn(column);
-        square.setRaw(raw);
+        square.setRow(raw);
         return square;
     }
 
@@ -102,7 +102,7 @@ public class Player {
 
         square = setSquare(board, square);
         int column = square.getColumn();
-        int raw = square.getRaw();
+        int raw = square.getRow();
         try {
             board.putSquare(column, raw, square);
         } catch (WrongPutException e) {

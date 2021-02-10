@@ -66,10 +66,10 @@ public class RoadPart extends Road implements Connectible {
         return raw;
     }
 
-    public void setRaw(int raw) {
+    public void setRow(int raw) {
 
-        leftField.setRaw(raw);
-        rightField.setRaw(raw);
+        leftField.setRow(raw);
+        rightField.setRow(raw);
         this.raw = raw;
     }
 

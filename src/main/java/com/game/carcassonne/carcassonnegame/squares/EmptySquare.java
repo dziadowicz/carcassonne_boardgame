@@ -2,15 +2,34 @@ package com.game.carcassonne.carcassonnegame.squares;
 
 import com.game.carcassonne.carcassonnegame.squares.parts.EmptyPart;
 import com.game.carcassonne.carcassonnegame.squares.parts.Connectible;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class EmptySquare implements Measurable {
 
     private int column;
     private int raw;
+    String mainImage = "file:src/main/resources/wall2.jpg";
+    ImageView imageView;
 
     public EmptySquare(int column, int raw) {
         this.column = column;
         this.raw = raw;
+    }
+
+    @Override
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    @Override
+    public void setImageView(ImageView imageView) {
+        this.imageView = imageView;
+    }
+
+    @Override
+    public String getMainImage() {
+        return mainImage;
     }
 
     @Override
@@ -19,7 +38,7 @@ public class EmptySquare implements Measurable {
     }
 
     @Override
-    public int getRaw() {
+    public int getRow() {
         return raw;
     }
 

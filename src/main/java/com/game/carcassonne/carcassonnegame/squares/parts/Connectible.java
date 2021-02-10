@@ -13,7 +13,7 @@ public interface Connectible extends Playable {
     boolean isConnectionToTheRight();
     boolean isConnectionAcross();
     int getRaw();
-    void setRaw(int raw);
+    void setRow(int raw);
     int getColumn();
     void setColumn(int column);
     void setPosition(String position);

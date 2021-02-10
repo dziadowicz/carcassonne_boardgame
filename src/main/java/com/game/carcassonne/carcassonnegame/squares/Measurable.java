@@ -1,6 +1,8 @@
 package com.game.carcassonne.carcassonnegame.squares;
 
 import com.game.carcassonne.carcassonnegame.squares.parts.Connectible;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public interface Measurable {
 
@@ -9,5 +11,8 @@ public interface Measurable {
     Connectible getRight();
     Connectible getDown();
     int getColumn();
-    int getRaw();
+    int getRow();
+    String getMainImage();
+    void setImageView(ImageView imageViev);
+    ImageView getImageView();
 }

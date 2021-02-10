@@ -124,13 +124,13 @@ public class Board {
             Measurable availableEmptySquare = availableSquaresList.get(new Random().nextInt(availableSquaresList.size()));
             try {
                 square.setColumn(availableEmptySquare.getColumn());
-                square.setRaw(availableEmptySquare.getRaw());
-                putSquare(availableEmptySquare.getColumn(), availableEmptySquare.getRaw(), square);
+                square.setRow(availableEmptySquare.getRow());
+                putSquare(availableEmptySquare.getColumn(), availableEmptySquare.getRow(), square);
             } catch (WrongPutException e) {
                 System.out.println("Wrong put: " + e);
             }
             return true;
-        } else {return false;}
+        } else return false;
     }
 
     public List<Measurable> getAvailableSquaresList() {
@@ -156,7 +156,7 @@ public class Board {
         Square square = SquareList.getStartingSquare();
         columnList.get(boardSize/2).set(boardSize/2, square);
         square.setColumn(boardSize/2);
-        square.setRaw(boardSize/2);
+        square.setRow(boardSize/2);
         square.addPartsToAllPartsList(this);
 
         Citi citi = new Citi();
@@ -186,21 +186,21 @@ public class Board {
         field2.setPartsSet(square.getDown());
     }
 
-    public boolean doesItFit(int column, int raw, Measurable square) {
-        if (column != 0 && column != (boardSize-1) && raw != 0 && raw != (boardSize-1)) {
-            boolean isAvailable = columnList.get(raw).get(column).getClass().equals(EmptySquare.class);
-            boolean isConnected = !(columnList.get(raw + 1).get(column).getClass().equals(EmptySquare.class) &&
-                    columnList.get(raw - 1).get(column).getClass().equals(EmptySquare.class) &&
-                    columnList.get(raw).get(column + 1).getClass().equals(EmptySquare.class) &&
-                    columnList.get(raw).get(column - 1).getClass().equals(EmptySquare.class));
-            boolean fitsLeft = columnList.get(raw).get(column - 1).getRight().getClass().equals(square.getLeft().getClass()) ||
-                    columnList.get(raw).get(column - 1).getClass().equals(EmptySquare.class);
-            boolean fitsRight = columnList.get(raw).get(column + 1).getLeft().getClass().equals(square.getRight().getClass()) ||
-                    columnList.get(raw).get(column + 1).getClass().equals(EmptySquare.class);
-            boolean fitsUp = columnList.get(raw + 1).get(column).getDown().getClass().equals(square.getUp().getClass()) ||
-                    columnList.get(raw + 1).get(column).getClass().equals(EmptySquare.class);
-            boolean fitsDown = columnList.get(raw - 1).get(column).getUp().getClass().equals(square.getDown().getClass()) ||
-                    columnList.get(raw - 1).get(column).getClass().equals(EmptySquare.class);
+    public boolean doesItFit(int column, int row, Measurable square) {
+        if (column != 0 && column != (boardSize-1) && row != 0 && row != (boardSize-1)) {
+            boolean isAvailable = columnList.get(row).get(column).getClass().equals(EmptySquare.class);
+            boolean isConnected = !(columnList.get(row + 1).get(column).getClass().equals(EmptySquare.class) &&
+                    columnList.get(row - 1).get(column).getClass().equals(EmptySquare.class) &&
+                    columnList.get(row).get(column + 1).getClass().equals(EmptySquare.class) &&
+                    columnList.get(row).get(column - 1).getClass().equals(EmptySquare.class));
+            boolean fitsLeft = columnList.get(row).get(column - 1).getRight().getClass().equals(square.getLeft().getClass()) ||
+                    columnList.get(row).get(column - 1).getClass().equals(EmptySquare.class);
+            boolean fitsRight = columnList.get(row).get(column + 1).getLeft().getClass().equals(square.getRight().getClass()) ||
+                    columnList.get(row).get(column + 1).getClass().equals(EmptySquare.class);
+            boolean fitsUp = columnList.get(row -1).get(column).getDown().getClass().equals(square.getUp().getClass()) ||
+                    columnList.get(row - 1).get(column).getClass().equals(EmptySquare.class);
+            boolean fitsDown = columnList.get(row + 1).get(column).getUp().getClass().equals(square.getDown().getClass()) ||
+                    columnList.get(row + 1).get(column).getClass().equals(EmptySquare.class);
 
             if (isAvailable && isConnected && fitsLeft && fitsRight && fitsUp && fitsDown) {
                 return true;
@@ -212,27 +212,27 @@ public class Board {
         }
     }
 
-    public boolean putSquare(int column, int raw, Square square) throws WrongPutException {
+    public boolean putSquare(int column, int row, Square square) throws WrongPutException {
 
-        if (doesItFit(column, raw, square)) {
-            columnList.get(raw).set(column, square);
-            square.setRaw(raw);
+        if (doesItFit(column, row, square)) {
+            columnList.get(row).set(column, square);
+            square.setRow(row);
             square.setColumn(column);
-            if (columnList.get(raw).get(column - 1).getRight().getClass().equals(square.getLeft().getClass())) {
+            if (columnList.get(row).get(column - 1).getRight().getClass().equals(square.getLeft().getClass())) {
                 square.getLeft().setExternalConnection();
-                columnList.get(raw).get(column - 1).getRight().setExternalConnection();
+                columnList.get(row).get(column - 1).getRight().setExternalConnection();
             }
-            if (columnList.get(raw).get(column + 1).getLeft().getClass().equals(square.getRight().getClass())){
+            if (columnList.get(row).get(column + 1).getLeft().getClass().equals(square.getRight().getClass())){
                 square.getRight().setExternalConnection();
-                columnList.get(raw).get(column + 1).getLeft().setExternalConnection();
+                columnList.get(row).get(column + 1).getLeft().setExternalConnection();
             }
-            if (columnList.get(raw + 1).get(column).getDown().getClass().equals(square.getUp().getClass())) {
+            if (columnList.get(row + 1).get(column).getDown().getClass().equals(square.getUp().getClass())) {
                 square.getUp().setExternalConnection();
-                columnList.get(raw + 1).get(column).getDown().setExternalConnection();
+                columnList.get(row + 1).get(column).getDown().setExternalConnection();
             }
-            if (columnList.get(raw - 1).get(column).getUp().getClass().equals(square.getDown().getClass())) {
+            if (columnList.get(row - 1).get(column).getUp().getClass().equals(square.getDown().getClass())) {
                 square.getDown().setExternalConnection();
-                columnList.get(raw - 1).get(column).getUp().setExternalConnection();
+                columnList.get(row - 1).get(column).getUp().setExternalConnection();
             }
             square.addPartsToAllPartsList(this);
             return true;
@@ -248,7 +248,7 @@ public class Board {
         System.out.println("The square can be located in: ");
 
         for (Measurable measurable : availableSquaresList) {
-            System.out.print(measurable.getColumn() + ":" + measurable.getRaw() + " | ");
+            System.out.print(measurable.getColumn() + ":" + measurable.getRow() + " | ");
         }
     }
 
@@ -256,7 +256,7 @@ public class Board {
 
         List<Connectible> putablePartsList = new ArrayList<>();
 
-        if (!columnList.get(square.getRaw()).get(square.getColumn() + 1).getClass().equals(EmptySquare.class)) {
+        if (!columnList.get(square.getRow()).get(square.getColumn() + 1).getClass().equals(EmptySquare.class)) {
             if (square.getRight().isAvailableForPawn(this)) {
                 putablePartsList.add(square.getRight());
             }
@@ -271,7 +271,7 @@ public class Board {
             }
         }
 
-        if (!columnList.get(square.getRaw() + 1).get(square.getColumn()).getClass().equals(EmptySquare.class)) {
+        if (!columnList.get(square.getRow() + 1).get(square.getColumn()).getClass().equals(EmptySquare.class)) {
             if (square.getUp().isAvailableForPawn(this)) {
                 putablePartsList.add(square.getUp());
             }
@@ -286,7 +286,7 @@ public class Board {
             }
         }
 
-        if (!columnList.get(square.getRaw() - 1).get(square.getColumn()).getClass().equals(EmptySquare.class)) {
+        if (!columnList.get(square.getRow() - 1).get(square.getColumn()).getClass().equals(EmptySquare.class)) {
             if (square.getDown().isAvailableForPawn(this)) {
                 putablePartsList.add(square.getDown());
             }
@@ -301,7 +301,7 @@ public class Board {
             }
         }
 
-        if (!columnList.get(square.getRaw()).get(square.getColumn() - 1).getClass().equals(EmptySquare.class)) {
+        if (!columnList.get(square.getRow()).get(square.getColumn() - 1).getClass().equals(EmptySquare.class)) {
             if (square.getLeft().isAvailableForPawn(this)) {
                 putablePartsList.add(square.getLeft());
             }

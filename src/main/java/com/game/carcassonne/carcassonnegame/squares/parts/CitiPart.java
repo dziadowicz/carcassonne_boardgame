@@ -69,7 +69,7 @@ public class CitiPart extends Citi implements Connectible {
         return raw;
     }
 
-    public void setRaw(int raw) {
+    public void setRow(int raw) {
         this.raw = raw;
     }
 

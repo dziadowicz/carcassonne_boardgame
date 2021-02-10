@@ -2,6 +2,7 @@ package com.game.carcassonne.carcassonnegame.squares;
 
 import com.game.carcassonne.carcassonnegame.board.Board;
 import com.game.carcassonne.carcassonnegame.squares.parts.*;
+import javafx.scene.image.ImageView;
 
 public class Square implements Measurable {
 
@@ -10,21 +11,34 @@ public class Square implements Measurable {
     private final Connectible right;
     private final Connectible down;
     private final Monastery monastery;
+    private final String mainImage;
     private int column;
-    private int raw;
+    private int row;
+    private ImageView imageView;
 
-    public Square(Connectible up, Connectible left, Connectible right, Connectible down, Monastery monastery) {
+    public Square(Connectible up, Connectible left, Connectible right, Connectible down, Monastery monastery, String mainImage) {
         this.up = up;
         this.left = left;
         this.right = right;
         this.down = down;
         this.monastery = monastery;
+        this.mainImage = mainImage;
         up.setPosition("Up");
         left.setPosition("Left");
         right.setPosition("Right");
         down.setPosition("Down");
         column = 99999;
-        raw = 99999;
+        row = 99999;
+    }
+
+    @Override
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    @Override
+    public void setImageView(ImageView imageView) {
+        this.imageView = imageView;
     }
 
     public int getColumn() {
@@ -40,17 +54,24 @@ public class Square implements Measurable {
         this.column = column;
     }
 
-    public int getRaw() {
-        return raw;
+    public int getRow() {
+        return row;
     }
 
-    public void setRaw(int raw) {
-        getLeft().setRaw(raw);
-        getRight().setRaw(raw);
-        getUp().setRaw(raw);
-        getDown().setRaw(raw);
+    public void setRow(int row) {
+        getLeft().setRow(row);
+        getRight().setRow(row);
+        getUp().setRow(row);
+        getDown().setRow(row);
 
-        this.raw = raw;
+        this.row = row;
+    }
+
+
+
+    @Override
+    public String getMainImage() {
+        return mainImage;
     }
 
     public static Square copySquare(Square square) {
@@ -103,19 +124,21 @@ public class Square implements Measurable {
 
         Monastery monastery = new Monastery(square.isThereMonastery());
 
-        return new Square(up, left, right, down, monastery);
+        String mainImage = new String(square.getMainImage());
+
+        return new Square(up, left, right, down, monastery, mainImage);
     }
 
     public static Square copyAndTurnLeftSquare(Square square) {
 
         Square turnLeft = Square.copySquare(square);
-        return new Square(turnLeft.getRight(), turnLeft.getUp(), turnLeft.getDown(), turnLeft.getLeft(), turnLeft.getMonastery());
+        return new Square(turnLeft.getRight(), turnLeft.getUp(), turnLeft.getDown(), turnLeft.getLeft(), turnLeft.getMonastery(), turnLeft.getMainImage());
     }
 
     public static Square copyAndTurnRightSquare(Square square) {
 
         Square turnRight = Square.copySquare(square);
-        return new Square(turnRight.getLeft(), turnRight.getDown(), turnRight.getUp(), turnRight.getRight(), turnRight.getMonastery());
+        return new Square(turnRight.getLeft(), turnRight.getDown(), turnRight.getUp(), turnRight.getRight(), turnRight.getMonastery(), turnRight.getMainImage());
     }
 
     @Override
@@ -196,7 +219,7 @@ public class Square implements Measurable {
         Square square = (Square) o;
 
         if (getColumn() != square.getColumn()) return false;
-        if (getRaw() != square.getRaw()) return false;
+        if (getRow() != square.getRow()) return false;
         if (getUp() != null ? !getUp().equals(square.getUp()) : square.getUp() != null) return false;
         if (getLeft() != null ? !getLeft().equals(square.getLeft()) : square.getLeft() != null) return false;
         if (getRight() != null ? !getRight().equals(square.getRight()) : square.getRight() != null) return false;
@@ -212,7 +235,7 @@ public class Square implements Measurable {
         result = 31 * result + (getDown() != null ? getDown().hashCode() : 0);
         result = 31 * result + (getMonastery() != null ? getMonastery().hashCode() : 0);
         result = 31 * result + getColumn();
-        result = 31 * result + getRaw();
+        result = 31 * result + getRow();
         return result;
     }
 }

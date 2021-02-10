@@ -3,12 +3,14 @@ package com.game.carcassonne.carcassonnegame.squares;
 import com.game.carcassonne.carcassonnegame.squares.parts.CitiPart;
 import com.game.carcassonne.carcassonnegame.squares.parts.FieldPart;
 import com.game.carcassonne.carcassonnegame.squares.parts.RoadPart;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.*;
 
 public class SquareList {
 
-    private static Square square00 = new Square(new CitiPart(false, false, false, false),
+    private static final Square square00 = new Square(new CitiPart(false, false, false, false),
             new RoadPart(false, false, true,
                     new FieldPart(false, false, true),
                     new FieldPart(false, true, true)),
@@ -16,7 +18,7 @@ public class SquareList {
                     new FieldPart(true, false, true),
                     new FieldPart(false, false, true)),
             new FieldPart(true, true, false),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_00.png");
     private static Square square01 = Square.copySquare(square00);
     private static Square square02 = Square.copySquare(square01);
     private static Square square03 = Square.copySquare(square02);
@@ -29,7 +31,7 @@ public class SquareList {
             new RoadPart(false, true, false,
                     new FieldPart(true, true, false),
                     new FieldPart(false, true, false)),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_04.png");
     private static Square square05 = Square.copySquare(square04);
     private static Square square06 = Square.copySquare(square05);
 
@@ -38,7 +40,7 @@ public class SquareList {
             new CitiPart(false, false, false, false),
             new FieldPart(true, false, false),
             new FieldPart(false, true, false),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_07.png");
     private static Square square08 = Square.copySquare(square07);
 
     private static Square square09 = new Square(new CitiPart(false, false, false, false),
@@ -49,7 +51,7 @@ public class SquareList {
             new RoadPart(true, false, false,
                     new FieldPart(true, false, false),
                     new FieldPart(true, true, false)),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_09.png");
     private static Square square10 = Square.copySquare(square09);
     private static Square square11 = Square.copySquare(square10);
 
@@ -63,7 +65,7 @@ public class SquareList {
             new RoadPart(false, false, false,
                     new FieldPart(true, false, false),
                     new FieldPart(false, true, false)),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_12.png");
     private static Square square13 = Square.copySquare(square12);
     private static Square square14 = Square.copySquare(square13);
 
@@ -71,7 +73,7 @@ public class SquareList {
             new FieldPart(false, true, true),
             new FieldPart(true, false, true),
             new FieldPart(true, true, false),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_15.png");
     private static Square square16 = Square.copySquare(square15);
     private static Square square17 = Square.copySquare(square16);
     private static Square square18 = Square.copySquare(square17);
@@ -87,7 +89,7 @@ public class SquareList {
             new RoadPart(false, false, false,
                     new FieldPart(true, false, false),
                     new FieldPart(false, true, false)),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_20.png");
     private static Square square21 = Square.copySquare(square20);
     private static Square square22 = Square.copySquare(square21);
     private static Square square23 = Square.copySquare(square22);
@@ -100,7 +102,7 @@ public class SquareList {
             new RoadPart(false, false, true,
                     new FieldPart(true, false, true),
                     new FieldPart(false, true, true)),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_24.png");
     private static Square square25 = Square.copySquare(square24);
     private static Square square26 = Square.copySquare(square25);
     private static Square square27 = Square.copySquare(square26);
@@ -117,7 +119,7 @@ public class SquareList {
             new RoadPart(true, false, false,
                     new FieldPart(true, false, false),
                     new FieldPart(true, true, true)),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_32.png");
     private static Square square33 = Square.copySquare(square32);
     private static Square square34 = Square.copySquare(square33);
     private static Square square35 = Square.copySquare(square34);
@@ -139,7 +141,7 @@ public class SquareList {
             new RoadPart(false, false, false,
                     new FieldPart(true, false, false),
                     new FieldPart(false, true, false)),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_41.png");
 
     private static Square square42 = new Square(new FieldPart(true, true, true),
             new FieldPart(true, true, true),
@@ -147,14 +149,14 @@ public class SquareList {
             new RoadPart(false, false, false,
                     new FieldPart(true, true, true),
                     new FieldPart(true, true, true)),
-            new Monastery(true));
+            new Monastery(true), "file:src/main/resources/squares/S_42.png");
     private static Square square43 = Square.copySquare(square42);
 
     private static Square square44 = new Square(new FieldPart(true, true, true),
             new FieldPart(true, true, true),
             new FieldPart(true, true, true),
             new FieldPart(true, true, true),
-            new Monastery(true));
+            new Monastery(true), "file:src/main/resources/squares/S_44.png");
     private static Square square45 = Square.copySquare(square44);
     private static Square square46 = Square.copySquare(square45);
     private static Square square47 = Square.copySquare(square46);
@@ -163,7 +165,7 @@ public class SquareList {
             new CitiPart(true, true, true, false),
             new CitiPart(true, true, true, false),
             new CitiPart(true, true, true, false),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_48.png");
 
     private static Square square49 = new Square(new CitiPart(true, true, false, true),
             new CitiPart(true, false, true, false),
@@ -171,7 +173,7 @@ public class SquareList {
             new RoadPart(false, false, false,
                     new FieldPart(false, false, false),
                     new FieldPart(false, false, false)),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_49.png");
     private static Square square50 = Square.copySquare(square49);
 
     private static Square square51 = new Square(new CitiPart(true, true, false, false),
@@ -180,19 +182,19 @@ public class SquareList {
             new RoadPart(false, false, false,
                     new FieldPart(false, false, false),
                     new FieldPart(false, false, false)),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_51.png");
 
     private static Square square52 = new Square(new CitiPart(true, true, false, true),
             new CitiPart(true, false, true, false),
             new CitiPart(false, true, true, false),
             new FieldPart(false, false, false),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_52.png");
 
     private static Square square53 = new Square(new CitiPart(true, true, false, false),
             new CitiPart(true, false, true, false),
             new CitiPart(false, true, true, false),
             new FieldPart(false, false, false),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_53.png");
     private static Square square54 = Square.copySquare(square53);
     private static Square square55 = Square.copySquare(square54);
 
@@ -204,7 +206,7 @@ public class SquareList {
             new RoadPart(false, true, false,
                     new FieldPart(false, true, false),
                     new FieldPart(false, true, false)),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_56.png");
     private static Square square57 = Square.copySquare(square56);
 
     private static Square square58 = new Square(new CitiPart(false, true, false, false),
@@ -215,7 +217,7 @@ public class SquareList {
             new RoadPart(false, true, false,
                     new FieldPart(false, true, false),
                     new FieldPart(false, true, false)),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_58.png");
     private static Square square59 = Square.copySquare(square58);
     private static Square square60 = Square.copySquare(square59);
 
@@ -223,14 +225,14 @@ public class SquareList {
             new CitiPart(true, false, false, false),
             new FieldPart(true, false, false),
             new FieldPart(false, true, false),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_61.png");
     private static Square square62 = Square.copySquare(square61);
 
     private static Square square63 = new Square(new CitiPart(false, true, false, false),
             new CitiPart(true, false, false, false),
             new FieldPart(true, false, false),
             new FieldPart(false, true, false),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_63.png");
     private static Square square64 = Square.copySquare(square63);
     private static Square square65 = Square.copySquare(square64);
 
@@ -238,26 +240,24 @@ public class SquareList {
             new CitiPart(false, false, true, false),
             new CitiPart(false, false, true, true),
             new FieldPart(false, false, false),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_66.png");
     private static Square square67 = Square.copySquare(square66);
 
     private static Square square68 = new Square(new FieldPart(false, false, false),
             new CitiPart(false, false, true, false),
             new CitiPart(false, false, true, false),
             new FieldPart(false, false, false),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_68.png");
 
     private static Square square69 = new Square(new FieldPart(false, false, true),
             new CitiPart(false, false, false, false),
             new CitiPart(false, false, false, false),
             new FieldPart(false, false, true),
-            new Monastery(false));
+            new Monastery(false), "file:src/main/resources/squares/S_69.png");
     private static Square square70 = Square.copySquare(square69);
     private static Square square71 = Square.copySquare(square70);
 
-    public static Square getStartingSquare() {
-        return square00;
-    }
+
 
     public static List<Square> getSquares() {
         List<Square> squareList = new ArrayList<>();
@@ -349,5 +349,9 @@ public class SquareList {
         }
 
         return gameSquaresDeque;
+    }
+
+    public static Square getStartingSquare() {
+        return square00;
     }
 }

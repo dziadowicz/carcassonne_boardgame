@@ -74,7 +74,7 @@ public class EmptyPart implements Connectible {
     }
 
     @Override
-    public void setRaw(int raw) {
+    public void setRow(int raw) {
 
     }
 
