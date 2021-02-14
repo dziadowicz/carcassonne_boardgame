@@ -18,6 +18,16 @@ public class EmptySquare implements Measurable {
     }
 
     @Override
+    public void setRotation(int rotation) {
+
+    }
+
+    @Override
+    public int getRotation() {
+        return 0;
+    }
+
+    @Override
     public ImageView getImageView() {
         return imageView;
     }

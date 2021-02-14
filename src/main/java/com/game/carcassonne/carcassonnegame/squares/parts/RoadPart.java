@@ -19,14 +19,16 @@ public class RoadPart extends Road implements Connectible {
     private Playable master;
     private boolean isTherePawn = false;
     private Pawn pawn;
+    private String pawnPosition;
 
     public RoadPart(boolean connectionToTheLeft, boolean connectionToTheRight,
-                    boolean connectionAcross, FieldPart leftField, FieldPart rightField) {
+                    boolean connectionAcross, FieldPart leftField, FieldPart rightField, String pawnPosition) {
         this.connectionToTheLeft = connectionToTheLeft;
         this.connectionToTheRight = connectionToTheRight;
         this.connectionAcross = connectionAcross;
         this.leftField = leftField;
         this.rightField = rightField;
+        this.pawnPosition = pawnPosition;
     }
 
     @Override
@@ -34,6 +36,11 @@ public class RoadPart extends Road implements Connectible {
         externalConnection = true;
         leftField.setExternalConnection();
         rightField.setExternalConnection();
+    }
+
+    @Override
+    public String getPawnPosition() {
+        return pawnPosition;
     }
 
     @Override

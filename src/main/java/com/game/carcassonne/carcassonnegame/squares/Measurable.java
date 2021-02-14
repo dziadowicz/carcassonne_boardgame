@@ -15,4 +15,6 @@ public interface Measurable {
     String getMainImage();
     void setImageView(ImageView imageViev);
     ImageView getImageView();
+    void setRotation(int rotation);
+    int getRotation();
 }

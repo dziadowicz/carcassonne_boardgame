@@ -106,6 +106,11 @@ public class EmptyPart implements Connectible {
     }
 
     @Override
+    public String getPawnPosition() {
+        return null;
+    }
+
+    @Override
     public List<Connectible> getPartsList() {
         return null;
     }

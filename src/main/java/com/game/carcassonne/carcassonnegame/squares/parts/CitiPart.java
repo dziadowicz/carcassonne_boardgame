@@ -19,12 +19,19 @@ public class CitiPart extends Citi implements Connectible {
     private boolean isTherePawn = false;
     private Playable master;
     private Pawn pawn;
+    private String pawnPosition;
 
-    public CitiPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross, boolean shield) {
+    public CitiPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross, boolean shield, String pawnPosition) {
         this.connectionToTheLeft = connectionToTheLeft;
         this.connectionToTheRight = connectionToTheRight;
         this.connectionAcross = connectionAcross;
         this.shield = shield;
+        this.pawnPosition = pawnPosition;
+    }
+
+    @Override
+    public String getPawnPosition() {
+        return pawnPosition;
     }
 
     public boolean isShield() {

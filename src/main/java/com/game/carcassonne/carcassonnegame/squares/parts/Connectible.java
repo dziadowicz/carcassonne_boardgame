@@ -22,4 +22,5 @@ public interface Connectible extends Playable {
     String getPosition();
     boolean getIsTherePawn();
     void putPawn(Player player);
+    String getPawnPosition();
 }

@@ -17,17 +17,24 @@ public class FieldPart extends Field implements Connectible {
     private Playable master;
     private boolean isTherePawn = false;
     private Pawn pawn;
+    private String pawnPosition;
 
 
-    public FieldPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross) {
+    public FieldPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross, String pawnPosition) {
         this.connectionToTheLeft = connectionToTheLeft;
         this.connectionToTheRight = connectionToTheRight;
         this.connectionAcross = connectionAcross;
+        this.pawnPosition = pawnPosition;
     }
 
     @Override
     public void setExternalConnection() {
         externalConnection = true;
+    }
+
+    @Override
+    public String getPawnPosition() {
+        return pawnPosition;
     }
 
     @Override

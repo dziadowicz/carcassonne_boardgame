@@ -15,6 +15,7 @@ public class Square implements Measurable {
     private int column;
     private int row;
     private ImageView imageView;
+    private int rotation;
 
     public Square(Connectible up, Connectible left, Connectible right, Connectible down, Monastery monastery, String mainImage) {
         this.up = up;
@@ -29,6 +30,33 @@ public class Square implements Measurable {
         down.setPosition("Down");
         column = 99999;
         row = 99999;
+        rotation = 0;
+    }
+
+    public Square(Connectible up, Connectible left, Connectible right, Connectible down, Monastery monastery, String mainImage, int rotation) {
+        this.up = up;
+        this.left = left;
+        this.right = right;
+        this.down = down;
+        this.monastery = monastery;
+        this.mainImage = mainImage;
+        up.setPosition("Up");
+        left.setPosition("Left");
+        right.setPosition("Right");
+        down.setPosition("Down");
+        column = 99999;
+        row = 99999;
+        this.rotation = rotation;
+    }
+
+    @Override
+    public int getRotation() {
+        return rotation;
+    }
+
+    @Override
+    public void setRotation(int rotation) {
+        this.rotation = rotation;
     }
 
     @Override
@@ -82,63 +110,71 @@ public class Square implements Measurable {
 
         if (square.getUp().getClass() == CitiPart.class) {
             CitiPart citiPart = (CitiPart) square.getUp();
-            up = new CitiPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross(), citiPart.isShield());
+            up = new CitiPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross(), citiPart.isShield(), square.getUp().getPawnPosition());
         } else if (square.getUp().getClass() == FieldPart.class) {
-            up = new FieldPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross());
+            up = new FieldPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross(), square.getUp().getPawnPosition());
         } else if (square.getUp().getClass() == RoadPart.class) {
             RoadPart roadPart = (RoadPart) square.getUp();
-            FieldPart leftField = new FieldPart(roadPart.getLeftField().isConnectionToTheLeft(), roadPart.getLeftField().isConnectionToTheRight(), roadPart.getLeftField().isConnectionAcross());
-            FieldPart rightField = new FieldPart(roadPart.getRightField().isConnectionToTheLeft(), roadPart.getRightField().isConnectionToTheRight(), roadPart.getRightField().isConnectionAcross());
-            up = new RoadPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross(), leftField, rightField);
+            FieldPart leftField = new FieldPart(roadPart.getLeftField().isConnectionToTheLeft(), roadPart.getLeftField().isConnectionToTheRight(), roadPart.getLeftField().isConnectionAcross(), roadPart.getLeftField().getPawnPosition());
+            FieldPart rightField = new FieldPart(roadPart.getRightField().isConnectionToTheLeft(), roadPart.getRightField().isConnectionToTheRight(), roadPart.getRightField().isConnectionAcross(), roadPart.getRightField().getPawnPosition());
+            up = new RoadPart(square.getUp().isConnectionToTheLeft(), square.getUp().isConnectionToTheRight(), square.getUp().isConnectionAcross(), leftField, rightField, square.getUp().getPawnPosition());
         } else {up = new EmptyPart();}
 
         if (square.getLeft().getClass() == CitiPart.class) {
             CitiPart citiPart = (CitiPart) square.getLeft();
-            left = new CitiPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross(), citiPart.isShield());
+            left = new CitiPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross(), citiPart.isShield(), square.getLeft().getPawnPosition());
         } else if (square.getLeft().getClass() == FieldPart.class) {
-            left = new FieldPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross());
+            left = new FieldPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross(), square.getLeft().getPawnPosition());
         } else if (square.getLeft().getClass() == RoadPart.class) {
             RoadPart roadPart = (RoadPart) square.getLeft();
-            left = new RoadPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross(), roadPart.getLeftField(), roadPart.getRightField());
+            FieldPart leftField = new FieldPart(roadPart.getLeftField().isConnectionToTheLeft(), roadPart.getLeftField().isConnectionToTheRight(), roadPart.getLeftField().isConnectionAcross(), roadPart.getLeftField().getPawnPosition());
+            FieldPart rightField = new FieldPart(roadPart.getRightField().isConnectionToTheLeft(), roadPart.getRightField().isConnectionToTheRight(), roadPart.getRightField().isConnectionAcross(), roadPart.getRightField().getPawnPosition());
+            left = new RoadPart(square.getLeft().isConnectionToTheLeft(), square.getLeft().isConnectionToTheRight(), square.getLeft().isConnectionAcross(), leftField, rightField, square.getLeft().getPawnPosition());
         } else {left = new EmptyPart();}
 
         if (square.getRight().getClass() == CitiPart.class) {
             CitiPart citiPart = (CitiPart) square.getRight();
-            right = new CitiPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross(), citiPart.isShield());
+            right = new CitiPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross(), citiPart.isShield(), square.getRight().getPawnPosition());
         } else if (square.getRight().getClass() == FieldPart.class) {
-            right = new FieldPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross());
+            right = new FieldPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross(), square.getRight().getPawnPosition());
         } else if (square.getRight().getClass() == RoadPart.class) {
             RoadPart roadPart = (RoadPart) square.getRight();
-            right = new RoadPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross(), roadPart.getLeftField(), roadPart.getRightField());
+            FieldPart leftField = new FieldPart(roadPart.getLeftField().isConnectionToTheLeft(), roadPart.getLeftField().isConnectionToTheRight(), roadPart.getLeftField().isConnectionAcross(), roadPart.getLeftField().getPawnPosition());
+            FieldPart rightField = new FieldPart(roadPart.getRightField().isConnectionToTheLeft(), roadPart.getRightField().isConnectionToTheRight(), roadPart.getRightField().isConnectionAcross(), roadPart.getRightField().getPawnPosition());
+            right = new RoadPart(square.getRight().isConnectionToTheLeft(), square.getRight().isConnectionToTheRight(), square.getRight().isConnectionAcross(), leftField, rightField, square.getRight().getPawnPosition());
         } else {right = new EmptyPart();}
 
         if (square.getDown().getClass() == CitiPart.class) {
             CitiPart citiPart = (CitiPart) square.getDown();
-            down = new CitiPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross(), citiPart.isShield());
+            down = new CitiPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross(), citiPart.isShield(), square.getDown().getPawnPosition());
         } else if (square.getDown().getClass() == FieldPart.class) {
-            down = new FieldPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross());
+            down = new FieldPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross(), square.getDown().getPawnPosition());
         } else if (square.getDown().getClass() == RoadPart.class) {
             RoadPart roadPart = (RoadPart) square.getDown();
-            down = new RoadPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross(), roadPart.getLeftField(), roadPart.getRightField());
+            FieldPart leftField = new FieldPart(roadPart.getLeftField().isConnectionToTheLeft(), roadPart.getLeftField().isConnectionToTheRight(), roadPart.getLeftField().isConnectionAcross(), roadPart.getLeftField().getPawnPosition());
+            FieldPart rightField = new FieldPart(roadPart.getRightField().isConnectionToTheLeft(), roadPart.getRightField().isConnectionToTheRight(), roadPart.getRightField().isConnectionAcross(), roadPart.getRightField().getPawnPosition());
+            down = new RoadPart(square.getDown().isConnectionToTheLeft(), square.getDown().isConnectionToTheRight(), square.getDown().isConnectionAcross(), leftField, rightField, square.getDown().getPawnPosition());
         } else {down = new EmptyPart();}
 
         Monastery monastery = new Monastery(square.isThereMonastery());
 
-        String mainImage = new String(square.getMainImage());
+        String mainImage = square.getMainImage();
 
-        return new Square(up, left, right, down, monastery, mainImage);
+        int rotation = square.getRotation();
+
+        return new Square(up, left, right, down, monastery, mainImage, rotation);
     }
 
     public static Square copyAndTurnLeftSquare(Square square) {
 
         Square turnLeft = Square.copySquare(square);
-        return new Square(turnLeft.getRight(), turnLeft.getUp(), turnLeft.getDown(), turnLeft.getLeft(), turnLeft.getMonastery(), turnLeft.getMainImage());
+        return new Square(turnLeft.getRight(), turnLeft.getUp(), turnLeft.getDown(), turnLeft.getLeft(), turnLeft.getMonastery(), turnLeft.getMainImage(), turnLeft.getRotation()-90);
     }
 
     public static Square copyAndTurnRightSquare(Square square) {
 
         Square turnRight = Square.copySquare(square);
-        return new Square(turnRight.getLeft(), turnRight.getDown(), turnRight.getUp(), turnRight.getRight(), turnRight.getMonastery(), turnRight.getMainImage());
+        return new Square(turnRight.getLeft(), turnRight.getDown(), turnRight.getUp(), turnRight.getRight(), turnRight.getMonastery(), turnRight.getMainImage(), turnRight.getRotation()+90);
     }
 
     @Override
