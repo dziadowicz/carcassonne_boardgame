@@ -20,6 +20,50 @@ public class RoadPart extends Road implements Connectible {
     private boolean isTherePawn = false;
     private Pawn pawn;
     private String pawnPosition;
+    private Connectible left;
+    private Connectible right;
+    private Connectible across;
+    private Connectible external;
+
+    @Override
+    public Connectible getLeft() {
+        return left;
+    }
+
+    @Override
+    public void setLeft(Connectible left) {
+        this.left = left;
+    }
+
+    @Override
+    public Connectible getRight() {
+        return right;
+    }
+
+    @Override
+    public void setRight(Connectible right) {
+        this.right = right;
+    }
+
+    @Override
+    public Connectible getAcross() {
+        return across;
+    }
+
+    @Override
+    public void setAcross(Connectible across) {
+        this.across = across;
+    }
+
+    @Override
+    public Connectible getExternal() {
+        return external;
+    }
+
+    @Override
+    public void setExternal(Connectible external) {
+        this.external = external;
+    }
 
     public RoadPart(boolean connectionToTheLeft, boolean connectionToTheRight,
                     boolean connectionAcross, FieldPart leftField, FieldPart rightField, String pawnPosition) {
@@ -44,7 +88,7 @@ public class RoadPart extends Road implements Connectible {
     }
 
     @Override
-    public boolean isExternalConnection() {
+    public boolean isExternalConnected() {
         return externalConnection;
     }
 
@@ -104,17 +148,17 @@ public class RoadPart extends Road implements Connectible {
     }
 
     @Override
-    public boolean isConnectionToTheLeft() {
+    public boolean isConnectedToTheLeft() {
         return connectionToTheLeft;
     }
 
     @Override
-    public boolean isConnectionToTheRight() {
+    public boolean isConnectedToTheRight() {
         return connectionToTheRight;
     }
 
     @Override
-    public boolean isConnectionAcross() {
+    public boolean isConnectedAcross() {
         return connectionAcross;
     }
 
@@ -149,10 +193,10 @@ public class RoadPart extends Road implements Connectible {
 
         RoadPart roadPart = (RoadPart) o;
 
-        if (isConnectionToTheLeft() != roadPart.isConnectionToTheLeft()) return false;
-        if (isConnectionToTheRight() != roadPart.isConnectionToTheRight()) return false;
-        if (isConnectionAcross() != roadPart.isConnectionAcross()) return false;
-        if (isExternalConnection() != roadPart.isExternalConnection()) return false;
+        if (isConnectedToTheLeft() != roadPart.isConnectedToTheLeft()) return false;
+        if (isConnectedToTheRight() != roadPart.isConnectedToTheRight()) return false;
+        if (isConnectedAcross() != roadPart.isConnectedAcross()) return false;
+        if (isExternalConnected() != roadPart.isExternalConnected()) return false;
         if (getRaw() != roadPart.getRaw()) return false;
         if (getColumn() != roadPart.getColumn()) return false;
         if (isTherePawn != roadPart.isTherePawn) return false;

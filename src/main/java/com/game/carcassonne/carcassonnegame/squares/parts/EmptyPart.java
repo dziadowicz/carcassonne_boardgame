@@ -44,7 +44,7 @@ public class EmptyPart implements Connectible {
     }
 
     @Override
-    public boolean isExternalConnection() {
+    public boolean isExternalConnected() {
         return false;
     }
 
@@ -54,17 +54,17 @@ public class EmptyPart implements Connectible {
     }
 
     @Override
-    public boolean isConnectionToTheLeft() {
+    public boolean isConnectedToTheLeft() {
         return false;
     }
 
     @Override
-    public boolean isConnectionToTheRight() {
+    public boolean isConnectedToTheRight() {
         return false;
     }
 
     @Override
-    public boolean isConnectionAcross() {
+    public boolean isConnectedAcross() {
         return false;
     }
 
@@ -98,12 +98,51 @@ public class EmptyPart implements Connectible {
         return null;
     }
 
+    @Override
+    public Connectible getLeft() {
+        return null;
+    }
 
+    @Override
+    public Connectible getRight() {
+        return null;
+    }
+
+    @Override
+    public Connectible getAcross() {
+        return null;
+    }
+
+    @Override
+    public Connectible getExternal() {
+        return null;
+    }
+
+    @Override
+    public void setLeft(Connectible left) {
+
+    }
+
+    @Override
+    public void setRight(Connectible right) {
+
+    }
+
+    @Override
+    public void setAcross(Connectible across) {
+
+    }
+
+    @Override
+    public void setExternal(Connectible external) {
+
+    }
 
     @Override
     public void setMaster(Playable playable) {
 
     }
+
 
     @Override
     public String getPawnPosition() {

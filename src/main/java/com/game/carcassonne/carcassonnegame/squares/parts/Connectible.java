@@ -7,11 +7,11 @@ import com.game.carcassonne.carcassonnegame.squares.Square;
 
 public interface Connectible extends Playable {
 
-    boolean isExternalConnection();
+    boolean isExternalConnected();
     void setExternalConnection();
-    boolean isConnectionToTheLeft();
-    boolean isConnectionToTheRight();
-    boolean isConnectionAcross();
+    boolean isConnectedToTheLeft();
+    boolean isConnectedToTheRight();
+    boolean isConnectedAcross();
     int getRaw();
     void setRow(int raw);
     int getColumn();
@@ -23,4 +23,12 @@ public interface Connectible extends Playable {
     boolean getIsTherePawn();
     void putPawn(Player player);
     String getPawnPosition();
+    Connectible getLeft();
+    Connectible getRight();
+    Connectible getAcross();
+    Connectible getExternal();
+    void setLeft(Connectible left);
+    void setRight(Connectible right);
+    void setAcross(Connectible across);
+    void setExternal(Connectible external);
 }

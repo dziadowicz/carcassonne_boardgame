@@ -14,6 +14,7 @@ public class Player {
     private final String color;
     private int points = 0;
     private int numberOfPawns = 7;
+
     public Player(String color) {
         this.color = color;
     }
@@ -102,13 +103,13 @@ public class Player {
 
         square = setSquare(board, square);
         int column = square.getColumn();
-        int raw = square.getRow();
+        int row = square.getRow();
         try {
-            board.putSquare(column, raw, square);
+            board.putSquare(column, row, square);
         } catch (WrongPutException e) {
             System.out.println(e);
         }
-        System.out.println(column + ":" + raw + square);
+        System.out.println(column + ":" + row + square);
         Connectible connectible = setPawnPosition(board, square);
 
         System.out.println(connectible);

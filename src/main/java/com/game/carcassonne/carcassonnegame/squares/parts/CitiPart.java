@@ -20,6 +20,10 @@ public class CitiPart extends Citi implements Connectible {
     private Playable master;
     private Pawn pawn;
     private String pawnPosition;
+    private Connectible left;
+    private Connectible right;
+    private Connectible across;
+    private Connectible external;
 
     public CitiPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross, boolean shield, String pawnPosition) {
         this.connectionToTheLeft = connectionToTheLeft;
@@ -32,6 +36,46 @@ public class CitiPart extends Citi implements Connectible {
     @Override
     public String getPawnPosition() {
         return pawnPosition;
+    }
+
+    @Override
+    public Connectible getLeft() {
+        return left;
+    }
+
+    @Override
+    public void setLeft(Connectible left) {
+        this.left = left;
+    }
+
+    @Override
+    public Connectible getRight() {
+        return right;
+    }
+
+    @Override
+    public void setRight(Connectible right) {
+        this.right = right;
+    }
+
+    @Override
+    public Connectible getAcross() {
+        return across;
+    }
+
+    @Override
+    public void setAcross(Connectible across) {
+        this.across = across;
+    }
+
+    @Override
+    public Connectible getExternal() {
+        return external;
+    }
+
+    @Override
+    public void setExternal(Connectible external) {
+        this.external = external;
     }
 
     public boolean isShield() {
@@ -67,7 +111,7 @@ public class CitiPart extends Citi implements Connectible {
     }
 
     @Override
-    public boolean isExternalConnection() {
+    public boolean isExternalConnected() {
         return externalConnection;
     }
 
@@ -101,17 +145,17 @@ public class CitiPart extends Citi implements Connectible {
     }
 
     @Override
-    public boolean isConnectionToTheLeft() {
+    public boolean isConnectedToTheLeft() {
         return connectionToTheLeft;
     }
 
     @Override
-    public boolean isConnectionToTheRight() {
+    public boolean isConnectedToTheRight() {
         return connectionToTheRight;
     }
 
     @Override
-    public boolean isConnectionAcross() {
+    public boolean isConnectedAcross() {
         return connectionAcross;
     }
 
@@ -149,11 +193,11 @@ public class CitiPart extends Citi implements Connectible {
 
         CitiPart citiPart = (CitiPart) o;
 
-        if (isConnectionToTheLeft() != citiPart.isConnectionToTheLeft()) return false;
-        if (isConnectionToTheRight() != citiPart.isConnectionToTheRight()) return false;
-        if (isConnectionAcross() != citiPart.isConnectionAcross()) return false;
+        if (isConnectedToTheLeft() != citiPart.isConnectedToTheLeft()) return false;
+        if (isConnectedToTheRight() != citiPart.isConnectedToTheRight()) return false;
+        if (isConnectedAcross() != citiPart.isConnectedAcross()) return false;
         if (isShield() != citiPart.isShield()) return false;
-        if (isExternalConnection() != citiPart.isExternalConnection()) return false;
+        if (isExternalConnected() != citiPart.isExternalConnected()) return false;
         if (getRaw() != citiPart.getRaw()) return false;
         if (getColumn() != citiPart.getColumn()) return false;
         if (isTherePawn != citiPart.isTherePawn) return false;

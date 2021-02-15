@@ -70,7 +70,7 @@ public class Citi implements Removable{
 
     @Override
     public void calculate(Connectible connectible) {
-
+        partsList.add(connectible);
     }
 
     //    @Override

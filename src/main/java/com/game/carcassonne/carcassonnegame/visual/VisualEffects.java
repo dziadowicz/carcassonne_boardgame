@@ -186,6 +186,7 @@ public class VisualEffects extends Application {
                 ImageView imageView = new ImageView(new Image("file:src/main/resources/pawns/red/" + square.getUp().getPawnPosition()));
                 imageView.setFitWidth(120);
                 imageView.setFitHeight(120);
+                imageView.setRotate(square.getRotation());
                 grid.add(imageView, square.getColumn(), square.getRow());
             }
         });

@@ -18,7 +18,50 @@ public class FieldPart extends Field implements Connectible {
     private boolean isTherePawn = false;
     private Pawn pawn;
     private String pawnPosition;
+    private Connectible left;
+    private Connectible right;
+    private Connectible across;
+    private Connectible external;
 
+    @Override
+    public Connectible getLeft() {
+        return left;
+    }
+
+    @Override
+    public void setLeft(Connectible left) {
+        this.left = left;
+    }
+
+    @Override
+    public Connectible getRight() {
+        return right;
+    }
+
+    @Override
+    public void setRight(Connectible right) {
+        this.right = right;
+    }
+
+    @Override
+    public Connectible getAcross() {
+        return across;
+    }
+
+    @Override
+    public void setAcross(Connectible across) {
+        this.across = across;
+    }
+
+    @Override
+    public Connectible getExternal() {
+        return external;
+    }
+
+    @Override
+    public void setExternal(Connectible external) {
+        this.external = external;
+    }
 
     public FieldPart(boolean connectionToTheLeft, boolean connectionToTheRight, boolean connectionAcross, String pawnPosition) {
         this.connectionToTheLeft = connectionToTheLeft;
@@ -38,7 +81,7 @@ public class FieldPart extends Field implements Connectible {
     }
 
     @Override
-    public boolean isExternalConnection() {
+    public boolean isExternalConnected() {
         return externalConnection;
     }
 
@@ -84,17 +127,17 @@ public class FieldPart extends Field implements Connectible {
     }
 
     @Override
-    public boolean isConnectionToTheLeft() {
+    public boolean isConnectedToTheLeft() {
         return connectionToTheLeft;
     }
 
     @Override
-    public boolean isConnectionToTheRight() {
+    public boolean isConnectedToTheRight() {
         return connectionToTheRight;
     }
 
     @Override
-    public boolean isConnectionAcross() {
+    public boolean isConnectedAcross() {
         return connectionAcross;
     }
 
@@ -127,10 +170,10 @@ public class FieldPart extends Field implements Connectible {
 
         FieldPart fieldPart = (FieldPart) o;
 
-        if (isConnectionToTheLeft() != fieldPart.isConnectionToTheLeft()) return false;
-        if (isConnectionToTheRight() != fieldPart.isConnectionToTheRight()) return false;
-        if (isConnectionAcross() != fieldPart.isConnectionAcross()) return false;
-        if (isExternalConnection() != fieldPart.isExternalConnection()) return false;
+        if (isConnectedToTheLeft() != fieldPart.isConnectedToTheLeft()) return false;
+        if (isConnectedToTheRight() != fieldPart.isConnectedToTheRight()) return false;
+        if (isConnectedAcross() != fieldPart.isConnectedAcross()) return false;
+        if (isExternalConnected() != fieldPart.isExternalConnected()) return false;
         if (getRaw() != fieldPart.getRaw()) return false;
         if (getColumn() != fieldPart.getColumn()) return false;
         if (isTherePawn != fieldPart.isTherePawn) return false;

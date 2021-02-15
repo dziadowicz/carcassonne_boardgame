@@ -11,16 +11,17 @@ import java.util.*;
 public class SquareList {
 
     private static final Square square00 = new Square(new CitiPart(false, false, false, false, "p01.png"),
-            new RoadPart(false, false, true,
-                    new FieldPart(false, false, true, "p00.png"),
-                    new FieldPart(false, true, true, "p06.png"),
-                    "p03.png"),
-            new RoadPart(false, false, true,
-                    new FieldPart(true, false, true, "p06.png"),
-                    new FieldPart(false, false, true, "p00.png"),
-                    "p03.png"),
-            new FieldPart(true, true, false, "p06.png"),
-            new Monastery(false), "file:src/main/resources/squares/S_00.png");
+                new RoadPart(false, false, true,
+                        new FieldPart(false, false, true, "p00.png"),
+                        new FieldPart(false, true, true, "p06.png"),
+                        "p03.png"),
+                new RoadPart(false, false, true,
+                        new FieldPart(true, false, true, "p06.png"),
+                        new FieldPart(false, false, true, "p00.png"),
+                        "p03.png"),
+                new FieldPart(true, true, false, "p06.png"),
+                new Monastery(false), "file:src/main/resources/squares/S_00.png");
+
     private static Square square01 = Square.copySquare(square00);
     private static Square square02 = Square.copySquare(square01);
     private static Square square03 = Square.copySquare(square02);
@@ -360,6 +361,11 @@ public class SquareList {
         squareList.add(square69);
         squareList.add(square70);
         squareList.add(square71);
+
+        for (Square square: squareList
+             ) {
+            square.setConnections();
+        }
 
         return squareList;
     }
