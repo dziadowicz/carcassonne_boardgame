@@ -12,13 +12,10 @@ import java.util.Set;
 
 public class Road implements Removable {
 
-    private Set<Connectible> partsSet = new HashSet<>();
+    private List<Connectible> partsList = new ArrayList<>();
     private boolean isTherePawn = false;
     private List<Pawn> pawnList = new ArrayList<>();
 
-    public Set<Connectible> getPartsSet() {
-        return partsSet;
-    }
 
     @Override
     public List<Pawn> getPawnList() {
@@ -33,10 +30,6 @@ public class Road implements Removable {
         } else {
             return true;
         }
-    }
-
-    public void setPartsSet(Connectible connectible) {
-        partsSet.add(connectible);
     }
 
     @Override
@@ -67,18 +60,33 @@ public class Road implements Removable {
 
         Road road = (Road) o;
 
-        if (isTherePawn != road.isTherePawn) return false;
-        return getPartsSet() != null ? getPartsSet().equals(road.getPartsSet()) : road.getPartsSet() == null;
+        if (isTherePawn() != road.isTherePawn()) return false;
+        if (getPartsList() != null ? !getPartsList().equals(road.getPartsList()) : road.getPartsList() != null)
+            return false;
+        return getPawnList() != null ? getPawnList().equals(road.getPawnList()) : road.getPawnList() == null;
     }
+
 
     @Override
     public List<Connectible> getPartsList() {
-        return null;
+        return partsList;
     }
 
     @Override
     public void calculate(Connectible connectible) {
+        partsList.clear();
+        partsList.add(connectible);
+        int size;
+        do {
+            size = partsList.size();
+            for (Connectible connectible1: partsList) {
+                if (connectible1.isConnectedToTheLeft() && !partsList.contains(connectible1.getLeft())) partsList.add(connectible1.getLeft());
+                if (connectible1.isConnectedToTheRight() && !partsList.contains(connectible1.getRight())) partsList.add(connectible1.getRight());
+                if (connectible1.isConnectedAcross() && !partsList.contains(connectible1.getAcross())) partsList.add(connectible1.getAcross());
+                if (connectible1.isExternalConnected() && !partsList.contains(connectible1.getExternal())) partsList.add(connectible1.getExternal());
+            }
 
+        } while (partsList.size() != size);
     }
 
     //    @Override

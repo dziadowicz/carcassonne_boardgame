@@ -70,7 +70,19 @@ public class Citi implements Removable{
 
     @Override
     public void calculate(Connectible connectible) {
+        partsList.clear();
         partsList.add(connectible);
+        int size;
+        do {
+            size = partsList.size();
+            for (Connectible connectible1: partsList) {
+                if (connectible1.isConnectedToTheLeft() && !partsList.contains(connectible1.getLeft())) partsList.add(connectible1.getLeft());
+                if (connectible1.isConnectedToTheRight() && !partsList.contains(connectible1.getRight())) partsList.add(connectible1.getRight());
+                if (connectible1.isConnectedAcross() && !partsList.contains(connectible1.getAcross())) partsList.add(connectible1.getAcross());
+                if (connectible1.isExternalConnected() && !partsList.contains(connectible1.getExternal())) partsList.add(connectible1.getExternal());
+            }
+
+        } while (partsList.size() != size);
     }
 
     //    @Override

@@ -4,6 +4,7 @@ import com.game.carcassonne.carcassonnegame.board.Board;
 import com.game.carcassonne.carcassonnegame.players.Pawn;
 import com.game.carcassonne.carcassonnegame.players.Player;
 import com.game.carcassonne.carcassonnegame.squares.Playable;
+import com.game.carcassonne.carcassonnegame.squares.Square;
 
 import java.util.List;
 
@@ -69,12 +70,12 @@ public class EmptyPart implements Connectible {
     }
 
     @Override
-    public int getRaw() {
+    public int getRow() {
         return 0;
     }
 
     @Override
-    public void setRow(int raw) {
+    public void setRow(int row) {
 
     }
 

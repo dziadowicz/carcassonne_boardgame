@@ -11,7 +11,7 @@ public class FieldPart extends Field implements Connectible {
     private final boolean connectionToTheRight;
     private final boolean connectionAcross;
     private boolean externalConnection = false;
-    private int raw = 99999;
+    private int row = 99999;
     private int column = 99999;
     private String position;
     private Playable master;
@@ -98,12 +98,12 @@ public class FieldPart extends Field implements Connectible {
     }
 
     @Override
-    public int getRaw() {
-        return raw;
+    public int getRow() {
+        return row;
     }
 
-    public void setRow(int raw) {
-        this.raw = raw;
+    public void setRow(int row) {
+        this.row = row;
     }
 
     @Override
@@ -158,7 +158,7 @@ public class FieldPart extends Field implements Connectible {
                 ", connectionToTheRight=" + connectionToTheRight +
                 ", connectionAcross=" + connectionAcross +
                 ", externalConnection=" + externalConnection +
-                ", raw=" + raw +
+                ", raw=" + row +
                 ", column=" + column +
                 '}';
     }
@@ -174,7 +174,7 @@ public class FieldPart extends Field implements Connectible {
         if (isConnectedToTheRight() != fieldPart.isConnectedToTheRight()) return false;
         if (isConnectedAcross() != fieldPart.isConnectedAcross()) return false;
         if (isExternalConnected() != fieldPart.isExternalConnected()) return false;
-        if (getRaw() != fieldPart.getRaw()) return false;
+        if (getRow() != fieldPart.getRow()) return false;
         if (getColumn() != fieldPart.getColumn()) return false;
         if (isTherePawn != fieldPart.isTherePawn) return false;
         if (getPosition() != null ? !getPosition().equals(fieldPart.getPosition()) : fieldPart.getPosition() != null)

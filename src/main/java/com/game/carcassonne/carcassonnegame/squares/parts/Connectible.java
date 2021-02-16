@@ -12,8 +12,8 @@ public interface Connectible extends Playable {
     boolean isConnectedToTheLeft();
     boolean isConnectedToTheRight();
     boolean isConnectedAcross();
-    int getRaw();
-    void setRow(int raw);
+    int getRow();
+    void setRow(int row);
     int getColumn();
     void setColumn(int column);
     void setPosition(String position);

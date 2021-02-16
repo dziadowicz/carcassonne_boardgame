@@ -11,7 +11,7 @@ public class RoadPart extends Road implements Connectible {
     private final boolean connectionToTheRight;
     private final boolean connectionAcross;
     private boolean externalConnection = false;
-    private int raw = 99999;
+    private int row = 99999;
     private int column = 99999;
     private String position;
     private FieldPart leftField;
@@ -113,15 +113,15 @@ public class RoadPart extends Road implements Connectible {
     }
 
     @Override
-    public int getRaw() {
-        return raw;
+    public int getRow() {
+        return row;
     }
 
-    public void setRow(int raw) {
+    public void setRow(int row) {
 
-        leftField.setRow(raw);
-        rightField.setRow(raw);
-        this.raw = raw;
+        leftField.setRow(row);
+        rightField.setRow(row);
+        this.row = row;
     }
 
     @Override
@@ -179,7 +179,7 @@ public class RoadPart extends Road implements Connectible {
                 ", connectionToTheRight=" + connectionToTheRight +
                 ", connectionAcross=" + connectionAcross +
                 ", externalConnection=" + externalConnection +
-                ", raw=" + raw +
+                ", raw=" + row +
                 ", column=" + column +
                 ", leftField=" + leftField +
                 ", rightField=" + rightField +
@@ -197,7 +197,7 @@ public class RoadPart extends Road implements Connectible {
         if (isConnectedToTheRight() != roadPart.isConnectedToTheRight()) return false;
         if (isConnectedAcross() != roadPart.isConnectedAcross()) return false;
         if (isExternalConnected() != roadPart.isExternalConnected()) return false;
-        if (getRaw() != roadPart.getRaw()) return false;
+        if (getRow() != roadPart.getRow()) return false;
         if (getColumn() != roadPart.getColumn()) return false;
         if (isTherePawn != roadPart.isTherePawn) return false;
         if (getPosition() != null ? !getPosition().equals(roadPart.getPosition()) : roadPart.getPosition() != null)

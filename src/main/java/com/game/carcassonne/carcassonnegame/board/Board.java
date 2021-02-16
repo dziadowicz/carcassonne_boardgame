@@ -1,10 +1,7 @@
 package com.game.carcassonne.carcassonnegame.board;
 
 import com.game.carcassonne.carcassonnegame.squares.*;
-import com.game.carcassonne.carcassonnegame.squares.parts.CitiPart;
-import com.game.carcassonne.carcassonnegame.squares.parts.FieldPart;
-import com.game.carcassonne.carcassonnegame.squares.parts.Connectible;
-import com.game.carcassonne.carcassonnegame.squares.parts.RoadPart;
+import com.game.carcassonne.carcassonnegame.squares.parts.*;
 
 import java.util.*;
 
@@ -26,10 +23,10 @@ public class Board {
 
         availableSquaresList.clear();
 
-        for (int raw = 0; raw < getBoardSize(); raw++) {
+        for (int row = 0; row < getBoardSize(); row++) {
             for (int column = 0; column < getBoardSize(); column++) {
-                if (doesItFit(column, raw, square)) {
-                    availableSquaresList.add(getSquare(column, raw));
+                if (doesItFit(column, row, square)) {
+                    availableSquaresList.add(getSquare(column, row));
                 }
             }
         }
@@ -46,6 +43,7 @@ public class Board {
 
     public void setMastersList() {
         mastersList.clear();
+        setAllPartsList();
 
         for (Connectible connectible : allPartsList) {
             boolean check = false;
@@ -55,16 +53,20 @@ public class Board {
                 }
                 if (!check) {
                     if (connectible.getClass().equals(CitiPart.class)) {
-                        mastersList.add(new Citi());
-                        mastersList.get(mastersList.size()-1).calculate(connectible);
+                        Citi citi = new Citi();
+                        citi.calculate(connectible);
+                        mastersList.add(citi);
                     }
                     if (connectible.getClass().equals(FieldPart.class)) {
-                        mastersList.add(new Field());
-                        mastersList.get(mastersList.size()-1).calculate(connectible);
+                        Field field = new Field();
+                        field.calculate(connectible);
+                        mastersList.add(field);
                     }
                     if (connectible.getClass().equals(RoadPart.class)) {
+                        Road road = new Road();
+                        road.calculate(connectible);
                         mastersList.add(new Road());
-                        mastersList.get(mastersList.size()-1).calculate(connectible);
+
                     }
                 }
             }
@@ -72,7 +74,13 @@ public class Board {
 
         for (Monastery monastery : monasteryList
              ) {
-
+            int n = 0;
+            for (int row = monastery.getRow() - 1; row < monastery.getRow() + 2; row++) {
+                for (int column = monastery.getColumn() - 1; column < monastery.getColumn() + 2; column++) {
+                    if (getSquare(column, row).getClass().equals(Square.class)) n++;
+                }
+            }
+            monastery.setNeighbours(n);
             mastersList.add(monastery);
         }
     }
@@ -94,11 +102,41 @@ public class Board {
     }
 
     public List<Connectible> getAllPartsList() {
+
+        setAllPartsList();
         return allPartsList;
     }
 
-    public void setAllPartsList(Connectible connectible) {
-        allPartsList.add(connectible);
+    public void setAllPartsList() {
+        allPartsList.clear();
+        for (int row = 0; row < getBoardSize(); row++) {
+            for (int column = 0; column < getBoardSize(); column++) {
+                if (getSquare(column, row).getClass().equals(Square.class)) {
+                    allPartsList.add(getSquare(column, row).getUp());
+                    if (getSquare(column, row).getUp().getClass().equals(RoadPart.class)) {
+                        allPartsList.add(((RoadPart)getSquare(column, row).getUp()).getRightField());
+                        allPartsList.add(((RoadPart)getSquare(column, row).getUp()).getLeftField());
+                    }
+                    allPartsList.add(getSquare(column, row).getLeft());
+                    if (getSquare(column, row).getLeft().getClass().equals(RoadPart.class)) {
+                        allPartsList.add(((RoadPart)getSquare(column, row).getLeft()).getRightField());
+                        allPartsList.add(((RoadPart)getSquare(column, row).getLeft()).getLeftField());
+                    }
+                    allPartsList.add(getSquare(column, row).getRight());
+                    if (getSquare(column, row).getRight().getClass().equals(RoadPart.class)) {
+                        allPartsList.add(((RoadPart)getSquare(column, row).getRight()).getRightField());
+                        allPartsList.add(((RoadPart)getSquare(column, row).getRight()).getLeftField());
+                    }
+                    allPartsList.add(getSquare(column, row).getDown());
+                    if (getSquare(column, row).getDown().getClass().equals(RoadPart.class)) {
+                        allPartsList.add(((RoadPart)getSquare(column, row).getDown()).getRightField());
+                        allPartsList.add(((RoadPart)getSquare(column, row).getDown()).getLeftField());
+                    }
+                    if (((Square)getSquare(column, row)).isThereMonastery()) monasteryList.add(((Square)getSquare(column, row)).getMonastery());
+                }
+            }
+        }
+
     }
 
     public boolean isThereAnyPossibleMove(Square square) {
@@ -157,7 +195,6 @@ public class Board {
         columnList.get(boardSize/2).set(boardSize/2, square);
         square.setColumn(boardSize/2);
         square.setRow(boardSize/2);
-        square.addPartsToAllPartsList(this);
 
         Citi citi = new Citi();
         square.getUp().setMaster(citi);
@@ -166,24 +203,17 @@ public class Board {
         Road road = new Road();
         square.getLeft().setMaster(road);
         square.getRight().setMaster(road);
-        road.setPartsSet(square.getLeft());
-        road.setPartsSet(square.getRight());
 
         Field field1 = new Field();
         RoadPart roadPart1 = (RoadPart) square.getLeft();
         RoadPart roadPart2 = (RoadPart) square.getRight();
         roadPart1.getLeftField().setMaster(field1);
         roadPart2.getRightField().setMaster(field1);
-        field1.setPartsSet(roadPart1.getLeftField());
-        field1.setPartsSet(roadPart2.getRightField());
 
         Field field2 = new Field();
         roadPart1.getRightField().setMaster(field2);
         roadPart2.getLeftField().setMaster(field2);
         square.getDown().setMaster(field2);
-        field2.setPartsSet(roadPart1.getRightField());
-        field2.setPartsSet(roadPart2.getLeftField());
-        field2.setPartsSet(square.getDown());
     }
 
     public boolean doesItFit(int column, int row, Measurable square) {
@@ -234,7 +264,6 @@ public class Board {
                 square.getDown().setExternalConnection();
                 columnList.get(row - 1).get(column).getUp().setExternalConnection();
             }
-            square.addPartsToAllPartsList(this);
             return true;
         } else {
             throw new WrongPutException();
@@ -319,11 +348,11 @@ public class Board {
         return putablePartsList;
     }
 
-    public String getSquareToString(int column, int raw) {
-        return columnList.get(raw).get(column).toString();
+    public String getSquareToString(int column, int row) {
+        return columnList.get(row).get(column).toString();
     }
 
-    public Measurable getSquare(int column, int raw) {
-        return columnList.get(raw).get(column);
+    public Measurable getSquare(int column, int row) {
+        return columnList.get(row).get(column);
     }
 }

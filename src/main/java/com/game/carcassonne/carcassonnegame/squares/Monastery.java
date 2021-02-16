@@ -13,6 +13,9 @@ public class Monastery implements Removable {
     private final boolean isThereMonastery;
     private boolean isTherePawn = false;
     private List<Pawn> pawnList = new ArrayList<>();
+    int row = 99999;
+    int column = 99999;
+    int neighbours;
 
     public Monastery(boolean isThereMonastery) {
         this.isThereMonastery = isThereMonastery;
@@ -25,6 +28,30 @@ public class Monastery implements Removable {
     @Override
     public boolean isAvailableForPawn(Board board) {
         return !isTherePawn();
+    }
+
+    public int getNeighbours() {
+        return neighbours;
+    }
+
+    public void setNeighbours(int neighbours) {
+        this.neighbours = neighbours;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
     }
 
     @Override

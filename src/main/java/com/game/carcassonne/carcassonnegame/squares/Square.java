@@ -210,6 +210,7 @@ public class Square implements Measurable {
         getRight().setColumn(column);
         getUp().setColumn(column);
         getDown().setColumn(column);
+        getMonastery().setColumn(column);
 
         this.column = column;
     }
@@ -223,6 +224,7 @@ public class Square implements Measurable {
         getRight().setRow(row);
         getUp().setRow(row);
         getDown().setRow(row);
+        getMonastery().setRow(row);
 
         this.row = row;
     }
@@ -337,35 +339,7 @@ public class Square implements Measurable {
         return monastery.isThereMonastery();
     }
 
-    public void addPartsToAllPartsList(Board board) {
-        board.setAllPartsList(up);
-        if (up.getClass().equals(RoadPart.class)) {
-            RoadPart roadPart = (RoadPart) up;
-            board.setAllPartsList(roadPart.getLeftField());
-            board.setAllPartsList(roadPart.getRightField());
-        }
-        board.setAllPartsList(left);
-        if (left.getClass().equals(RoadPart.class)) {
-            RoadPart roadPart = (RoadPart) left;
-            board.setAllPartsList(roadPart.getLeftField());
-            board.setAllPartsList(roadPart.getRightField());
-        }
-        board.setAllPartsList(right);
-        if (right.getClass().equals(RoadPart.class)) {
-            RoadPart roadPart = (RoadPart) right;
-            board.setAllPartsList(roadPart.getLeftField());
-            board.setAllPartsList(roadPart.getRightField());
-        }
-        board.setAllPartsList(down);
-        if (down.getClass().equals(RoadPart.class)) {
-            RoadPart roadPart = (RoadPart) down;
-            board.setAllPartsList(roadPart.getLeftField());
-            board.setAllPartsList(roadPart.getRightField());
-        }
-        if (isThereMonastery()) {
-            board.setMonasteryList(monastery);
-        }
-    }
+
 
 
     @Override

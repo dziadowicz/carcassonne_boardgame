@@ -13,7 +13,7 @@ public class CitiPart extends Citi implements Connectible {
     private final boolean connectionAcross;
     private final boolean shield;
     private boolean externalConnection = false;
-    private int raw = 99999;
+    private int row = 99999;
     private int column = 99999;
     private String position;
     private boolean isTherePawn = false;
@@ -116,12 +116,12 @@ public class CitiPart extends Citi implements Connectible {
     }
 
     @Override
-    public int getRaw() {
-        return raw;
+    public int getRow() {
+        return row;
     }
 
-    public void setRow(int raw) {
-        this.raw = raw;
+    public void setRow(int row) {
+        this.row = row;
     }
 
     @Override
@@ -181,7 +181,7 @@ public class CitiPart extends Citi implements Connectible {
                 ", connectionAcross=" + connectionAcross +
                 ", shield=" + shield +
                 ", externalConnection=" + externalConnection +
-                ", raw=" + raw +
+                ", raw=" + row +
                 ", column=" + column +
                 '}';
     }
@@ -198,7 +198,7 @@ public class CitiPart extends Citi implements Connectible {
         if (isConnectedAcross() != citiPart.isConnectedAcross()) return false;
         if (isShield() != citiPart.isShield()) return false;
         if (isExternalConnected() != citiPart.isExternalConnected()) return false;
-        if (getRaw() != citiPart.getRaw()) return false;
+        if (getRow() != citiPart.getRow()) return false;
         if (getColumn() != citiPart.getColumn()) return false;
         if (isTherePawn != citiPart.isTherePawn) return false;
         if (getPosition() != null ? !getPosition().equals(citiPart.getPosition()) : citiPart.getPosition() != null)
