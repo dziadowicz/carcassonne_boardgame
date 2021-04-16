@@ -286,66 +286,37 @@ public class Board {
         List<Connectible> putablePartsList = new ArrayList<>();
 
         if (!columnList.get(square.getRow()).get(square.getColumn() + 1).getClass().equals(EmptySquare.class)) {
-            if (square.getRight().isAvailableForPawn(this)) {
-                putablePartsList.add(square.getRight());
-            }
-            if (square.getRight().getClass().equals(RoadPart.class)) {
-                RoadPart roadPart= (RoadPart)square.getRight();
-                if (roadPart.getLeftField().isAvailableForPawn(this)) {
-                    putablePartsList.add(roadPart.getLeftField());
-                }
-                if (roadPart.getRightField().isAvailableForPawn(this)) {
-                    putablePartsList.add(roadPart.getRightField());
-                }
-            }
+            addAllConnectedFields(putablePartsList, square.getRight());
         }
 
         if (!columnList.get(square.getRow() + 1).get(square.getColumn()).getClass().equals(EmptySquare.class)) {
-            if (square.getUp().isAvailableForPawn(this)) {
-                putablePartsList.add(square.getUp());
-            }
-            if (square.getUp().getClass().equals(RoadPart.class)) {
-                RoadPart roadPart= (RoadPart)square.getUp();
-                if (roadPart.getLeftField().isAvailableForPawn(this)) {
-                    putablePartsList.add(roadPart.getLeftField());
-                }
-                if (roadPart.getRightField().isAvailableForPawn(this)) {
-                    putablePartsList.add(roadPart.getRightField());
-                }
-            }
+            addAllConnectedFields(putablePartsList, square.getUp());
         }
 
         if (!columnList.get(square.getRow() - 1).get(square.getColumn()).getClass().equals(EmptySquare.class)) {
-            if (square.getDown().isAvailableForPawn(this)) {
-                putablePartsList.add(square.getDown());
-            }
-            if (square.getDown().getClass().equals(RoadPart.class)) {
-                RoadPart roadPart= (RoadPart)square.getDown();
-                if (roadPart.getLeftField().isAvailableForPawn(this)) {
-                    putablePartsList.add(roadPart.getLeftField());
-                }
-                if (roadPart.getRightField().isAvailableForPawn(this)) {
-                    putablePartsList.add(roadPart.getRightField());
-                }
-            }
+            addAllConnectedFields(putablePartsList, square.getDown());
         }
 
         if (!columnList.get(square.getRow()).get(square.getColumn() - 1).getClass().equals(EmptySquare.class)) {
-            if (square.getLeft().isAvailableForPawn(this)) {
-                putablePartsList.add(square.getLeft());
-            }
-            if (square.getLeft().getClass().equals(RoadPart.class)) {
-                RoadPart roadPart= (RoadPart)square.getLeft();
-                if (roadPart.getLeftField().isAvailableForPawn(this)) {
-                    putablePartsList.add(roadPart.getLeftField());
-                }
-                if (roadPart.getRightField().isAvailableForPawn(this)) {
-                    putablePartsList.add(roadPart.getRightField());
-                }
-            }
+            addAllConnectedFields(putablePartsList, square.getLeft());
         }
 
         return putablePartsList;
+    }
+
+    private void addAllConnectedFields(List<Connectible> putablePartsList, Connectible down) {
+        addConnectedField(putablePartsList, down);
+        if (down instanceof RoadPart) {
+            RoadPart roadPart = (RoadPart) down;
+            addConnectedField(putablePartsList, roadPart.getLeftField());
+            addConnectedField(putablePartsList, roadPart.getRightField());
+        }
+    }
+
+    private void addConnectedField(List<Connectible> putablePartsList, Connectible leftField) {
+        if (leftField.isAvailableForPawn(this)) {
+            putablePartsList.add(leftField);
+        }
     }
 
     public String getSquareToString(int column, int row) {

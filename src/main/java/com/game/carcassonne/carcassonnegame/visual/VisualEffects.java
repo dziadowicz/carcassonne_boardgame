@@ -3,12 +3,18 @@ package com.game.carcassonne.carcassonnegame.visual;
 import com.game.carcassonne.carcassonnegame.board.Board;
 import com.game.carcassonne.carcassonnegame.board.WrongPutException;
 import com.game.carcassonne.carcassonnegame.game.Game;
+import com.game.carcassonne.carcassonnegame.language.Language;
+import com.game.carcassonne.carcassonnegame.language.WrongLanguageException;
 import com.game.carcassonne.carcassonnegame.players.*;
 import com.game.carcassonne.carcassonnegame.squares.EmptySquare;
 import com.game.carcassonne.carcassonnegame.squares.Measurable;
 import com.game.carcassonne.carcassonnegame.squares.Square;
 import com.game.carcassonne.carcassonnegame.squares.SquareList;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -17,15 +23,13 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -53,6 +57,7 @@ public class VisualEffects extends Application {
     private GridPane mainGrid = new GridPane();
     private List<Node> pawnList = new ArrayList<>();
     private int pawnPosition = 0;
+    private Language language = new Language();
 
     public void clearAvailableSquares() {
         for (Node node: nodeList) {
@@ -152,7 +157,7 @@ public class VisualEffects extends Application {
         Background background2 = new Background(backgroundFill);
         grid.setBackground(background1);
 
-        Button button = new Button("Put square");
+        Button button = new Button(language.getString(1));
         button.setOnAction(event ->  {
 
             square = squareDeque.pop();
@@ -204,8 +209,47 @@ public class VisualEffects extends Application {
 
         Scene scene = new Scene(mainGrid, 1000, 600, Color.BLACK);
 
+        GridPane menuGrid = new GridPane();
+        Button start = new Button("Start game");
+        start.setOnAction(e -> primaryStage.setScene(scene));
+        ChoiceBox playersNumber = new ChoiceBox();
+        playersNumber.getItems().add("2");
+        playersNumber.getItems().add("3");
+        playersNumber.getItems().add("4");
+        playersNumber.getItems().add("5");
+        playersNumber.getItems().add("6");
+        playersNumber.setValue("2");
+        Text carcassonne = new Text(language.getString(0));
+        ChoiceBox<String> languageBox = new ChoiceBox(FXCollections.observableArrayList(Language.getAvailableLanguages()));
+        languageBox.setValue("english");
+        ChangeListener<String> changeListener = new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
+                System.out.println(newValue);
+                try {
+                    language.setLanguage(newValue);
+                } catch (WrongLanguageException e) {
+                    System.out.println("Wrong language");
+                } finally {
+                    System.out.println("Current language: " + language.getLanguage());
+                }
+            }
+        };
+        languageBox.getSelectionModel().selectedItemProperty().addListener(changeListener);
+
+        carcassonne.setStyle("-fx-font: 36 arial;");
+        menuGrid.add(carcassonne, 1, 1, 3, 1);
+        menuGrid.add(languageBox, 4, 1);
+        menuGrid.add(new Text("Pick number of players   "), 1,2);
+        menuGrid.add(playersNumber, 2, 2);
+        menuGrid.add(start, 1, 3);
+
+        Scene menu = new Scene(menuGrid, 1000, 600, Color.BLACK);
+
         primaryStage.setTitle("Carcassonne");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(menu);
         primaryStage.setFullScreen(true);
         primaryStage.show();
         showAvailableSquares(board);
